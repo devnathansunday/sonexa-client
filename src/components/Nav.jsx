@@ -52,7 +52,7 @@ const Nav = () => {
         <div className="relative bg-my-nav border-b-2 border-my-content">
             <div className="mx-auto max-w-[1280px]">
                 <nav className="h-16 flex items-center justify-between px-3">
-                    <Link href="/"><h1 className="font-extrabold text-xl">Sonexa</h1></Link>
+                    <a href="/"><h1 className="font-extrabold text-xl">Sonexa</h1></a>
                     
                     {/* desktop nav */}
                     <div className="hidden h-full md:flex md:items-center gap-12 font-bold text-sm text-my-muted-text">
@@ -88,17 +88,17 @@ const Nav = () => {
                         </div>
 
                         <button className="w-fit hover:text-my-pink active:text-my-pink">
-                            <Link href={`/video`}>About</Link>
+                            <Link href={`/about`}>About</Link>
                         </button>
                         <button className="w-fit hover:text-my-pink active:text-my-pink">
-                            <Link href={`/guide`}>Contact</Link>
+                            <Link href={`/contact`}>Contact</Link>
                         </button>
                         <button className="w-fit hover:text-my-pink active:text-my-pink">
-                            <Link href={`/guide`}>Advertise with us</Link>
+                            <Link href={`/advertise`}>Advertise with us</Link>
                         </button>
                     </div>
 
-                    <div className="hidden lg:flex md:items-center bg-my-content overflow-hidden rounded-full">
+                    <div className="hidden h-10 lg:flex md:items-center bg-my-content overflow-hidden rounded-full">
                         <input 
                             type="text" 
                             ref={inputRef} 
@@ -114,7 +114,7 @@ const Nav = () => {
                             }}
                         />
 
-                        <img src="/svgs/search.svg" className="pe-5 w-9 h-9" alt="" />
+                        <img src="/svgs/search.svg" className="mx-5 w-4 h-4" alt="" />
                     </div>
 
                     <div className="flex items-center gap-4 lg:hidden">
