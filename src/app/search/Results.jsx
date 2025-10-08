@@ -19,8 +19,6 @@ const Results = () => {
 
     useEffect(() => {
         const fetchResults = async() => {
-            if (!query) return console.log("No query yet — skipping fetch");
-
             try {
                 setLoading(true);
                 const results = await searchPosts(query, 0, 3);
