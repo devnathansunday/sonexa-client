@@ -9,9 +9,9 @@ import Image from "next/image";
 const Results = () => {
     const searchParams = useSearchParams();
     const query = searchParams.get("query");
-
+    
     const { trackPostViews } = useTrackView();
-
+    
     const [results, setResults] = useState([]);
     const [loadingMore, setLoadingMore] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -19,6 +19,8 @@ const Results = () => {
 
     useEffect(() => {
         const fetchResults = async() => {
+            if (!query) return console.log("No query yet — skipping fetch");
+
             try {
                 setLoading(true);
                 const results = await searchPosts(query, 0, 3);
