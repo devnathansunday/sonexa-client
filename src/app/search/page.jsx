@@ -3,7 +3,7 @@ import Results from "./Results";
 
 const SearchPage = () => {
     return (
-        <Suspense fallback={<p>Loading search results...</p>}>
+        <Suspense fallback={<p className="text-xs text-my-muted-text">...</p>}>
             <Results />
         </Suspense>
     )
