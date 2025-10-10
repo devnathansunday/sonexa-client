@@ -10,7 +10,7 @@ export async function fetchPosts(offset = 0, limit = 6, postType) {
         const response = await fetch(`${API_URL}/?${params}`, {
             method: 'GET',
             next: { 
-                tags: ['posts']
+                tags: ['posts-by-type']
             }
         });
         
@@ -33,7 +33,7 @@ export async function fetchAllPosts(offset = 0, limit = 6) {
         const response = await fetch(`${API_URL}/all/?${params}`, {
             method: 'GET',
             next: { 
-                tags: ['posts']
+                tags: ['all-posts']
             }
         });
         
@@ -73,7 +73,7 @@ export async function getFeaturedPosts() {
             const response = await fetch(`${API_URL}/featured`, {
                 method: 'GET',
                 next: { 
-                    tags: ['posts']
+                    tags: ['featured-posts']
                 }
         });
             
@@ -92,7 +92,7 @@ export async function getPostBySlug(slug) {
         const response = await fetch(`${API_URL}/${slug}/slug`, {
             method: 'GET',
             next: { 
-                tags: ['posts']
+                tags: ['posts-by-slug']
             }
         });
             
@@ -110,6 +110,9 @@ export async function getPopularPosts() {
     try {
         const response = await fetch(`${API_URL}/popular`, {
             method: 'GET',
+            next: { 
+                tags: ['popular-posts']
+            }
         });
         
         if (!response.ok) throw new Error(`API error ${response.status}`);

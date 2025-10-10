@@ -55,7 +55,7 @@ const Nav = () => {
                     <a href="/"><h1 className="font-extrabold text-xl">Sonexa</h1></a>
                     
                     {/* desktop nav */}
-                    <div className="hidden h-full md:flex md:items-center gap-12 font-bold text-sm text-my-muted-text">
+                    <div className="hidden h-full lg:flex md:items-center gap-12 font-bold text-sm text-my-muted-text">
                         <button className="w-fit hover:text-my-pink active:text-my-pink">
                             <Link href="/">Home</Link>
                         </button>
@@ -96,6 +96,9 @@ const Nav = () => {
                         <button className="w-fit hover:text-my-pink active:text-my-pink">
                             <Link href={`/advertise`}>Advertise with us</Link>
                         </button>
+                        <button className="w-fit hover:text-my-pink active:text-my-pink">
+                            <Link href={`/advertise`}>Disclaimer</Link>
+                        </button>
                     </div>
 
                     <div className="hidden h-10 lg:flex md:items-center bg-my-content overflow-hidden rounded-full">
@@ -122,7 +125,7 @@ const Nav = () => {
                             <img src="/svgs/search.svg" alt="" />
                         </div>
 
-                        <div className="hamburger flex flex-col justify-center gap-0.5 cursor-pointer md:hidden" onClick={() => setMenuOpen(true)}>
+                        <div className="hamburger flex flex-col justify-center gap-0.5 cursor-pointer lg:hidden" onClick={() => setMenuOpen(true)}>
                             <div className="w-3 h-0.5 bg-my-text rounded-full"></div>
                             <div className="w-5 h-0.5 bg-my-text rounded-full"></div>
                             <div className="w-4 h-0.5 bg-my-text rounded-full"></div>
