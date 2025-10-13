@@ -48,10 +48,10 @@ const Extras = () => {
                 <h4 className="font-bold text-sm mb-3">CATEGORIES</h4>
                 
                 <div className="text-sm text-my-blue flex flex-wrap gap-2">
-                    <Link href='/song' className="w-fit"><button className="w-fit border border-my-blue px-6 py-2 rounded-full cursor-pointer">Songs</button></Link>
-                    <Link href='/news' className="w-fit"><button className="w-fit border border-my-blue px-6 py-2 rounded-full cursor-pointer">News</button></Link>
-                    <Link href='/video' className="w-fit"><button className="w-fit border border-my-blue px-6 py-2 rounded-full cursor-pointer">Videos</button></Link>
-                    <Link href='/guide' className="w-fit"><button className="w-fit border border-my-blue px-6 py-2 rounded-full cursor-pointer">Guides</button></Link>
+                    <Link href='/song' className="w-fit"><button className="w-fit text-xs border border-my-blue px-6 py-2 rounded-full cursor-pointer">Songs</button></Link>
+                    <Link href='/news' className="w-fit"><button className="w-fit text-xs border border-my-blue px-6 py-2 rounded-full cursor-pointer">News</button></Link>
+                    <Link href='/video' className="w-fit"><button className="w-fit text-xs border border-my-blue px-6 py-2 rounded-full cursor-pointer">Videos</button></Link>
+                    <Link href='/guide' className="w-fit"><button className="w-fit text-xs border border-my-blue px-6 py-2 rounded-full cursor-pointer">Guides</button></Link>
                 </div>
             </div>
         </section>

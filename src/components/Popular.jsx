@@ -4,23 +4,31 @@ import Link from "next/link";
 import { useTrackView } from "@/context/TrackViewContext";
 
 const Popular = ({ popularPosts }) => {
+    if (!popularPosts ) {
+        return (
+            <div className="w-full flex justify-center items-center p-10">
+                <p className="text-my-pink">Failed to load posts, try reloading</p>
+            </div>
+        )
+    }
+
     const { trackPostViews } = useTrackView();
 
     return (
         <section className="mx-auto max-w-[1280px]">
             <div className="m-3 p-3 bg-my-dark">
-                <h2 className="capitalize font-bold text-sm mb-3 rounded">Popular</h2>
+                <h2 className="capitalize font-bold text-xl mb-3 rounded">Popular</h2>
 
-                <div className="grid gap-y-3 gap-x-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {popularPosts.length > 0 && popularPosts.map(post => (
-                        <Link href={`/${post.type}/${post.slug}`} key={post.id} className="flex-1">
+                        <Link href={`/${post.type}/${post.slug}`} key={post.id} className="flex-1 transform transition-all ease-out duration-100 active:scale-[98%] group">
                             <div className="flex gap-3" onClick={() => trackPostViews(post.id)}>
-                                <figure className="flex-1 w-full max-w-[200px] h-[125px] xs:h-[150px] sm:h-[125px] object-cover overflow-hidden rounded-xl">
+                                <figure className="flex-1 w-full max-w-[180px] h-[120px] object-cover overflow-hidden rounded-lg">
                                     <Image
                                         src={post.featuredImage.url}
                                         alt=""
-                                        width={600}
-                                        height={200}
+                                        width={400}
+                                        height={100}
                                         className="object-cover"
                                         style={{ width: '100%', height: "100%" }}
                                     />
@@ -28,12 +36,14 @@ const Popular = ({ popularPosts }) => {
 
                                 <div className="flex-1 space-y-1 my-1">
                                     <p className="text-xs text-my-text capitalize border border-my-muted-text px-3 py-1 w-fit rounded">{post.type}</p>
-                                    <h2 className="text-sm font-medium line-clamp-3 xs:line-clamp-4 sm:line-clamp-3">{post.heading}</h2>
-                                    <p className="text-my-muted-text text-xs">{new Date(post.createdAt).toLocaleString('en-GB', {
-                                        day: '2-digit',
-                                        month: 'long',
-                                        year: 'numeric'
-                                    })}</p>
+                                    
+                                    <h2 className="text-sm font-medium line-clamp-2 group-active:text-my-pink">{post.heading}</h2>
+
+                                    <div className="text-sm text-my-muted-text line-clamp-2">
+                                        {post.content.map((c, index) =>
+                                            c.type === 'text' ? <p key={index}>{c.content}</p> : null
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </Link>

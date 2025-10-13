@@ -28,10 +28,10 @@ const LoadMorePosts = ({ initialPosts, type }) => {
         <div>
             <div className="grid sm:grid-cols-2 gap-x-10 gap-y-3">
                 {posts.length > 0 && posts.map(post => (
-                    <div key={post.slug}>
+                    <div key={post.slug} className="transform transition-all ease-out duration-100 active:scale-[98%] group">
                         <Link href={`/${post.type}/${post.slug}`} className="w-full">
                             <div className="mb-3 flex gap-3" onClick={() => trackPostViews(post.id)}>
-                                <figure className="flex-1 w-full max-w-[200px] h-[125px] xs:h-[150px] sm:h-[125px] object-cover overflow-hidden rounded-xl">
+                                <figure className="flex-1 w-full max-w-[180px] h-[120px] object-cover overflow-hidden rounded-xl">
                                     <Image
                                         src={post.featuredImage.url || null}
                                         alt=""
@@ -48,7 +48,8 @@ const LoadMorePosts = ({ initialPosts, type }) => {
                                         month: 'long',
                                         year: 'numeric'
                                     })}</p>
-                                    <h2 className="text-sm font-medium line-clamp-2">{post.heading}</h2>
+
+                                    <h2 className="text-sm font-medium line-clamp-2 group-active:text-my-pink">{post.heading}</h2>
 
                                     <div className="text-sm text-my-muted-text line-clamp-3">
                                         {post.content.map((c, index) =>
@@ -58,8 +59,6 @@ const LoadMorePosts = ({ initialPosts, type }) => {
                                 </div>
                             </div>
                         </Link>
-
-                        {/* <hr className="w-full h-1 bg-my-content border-none mb-3" /> */}
                     </div>
                 ))}
             </div>

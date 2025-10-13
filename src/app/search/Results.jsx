@@ -14,14 +14,14 @@ const Results = () => {
     
     const [results, setResults] = useState([]);
     const [loadingMore, setLoadingMore] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [hasMore, sethasMore] = useState(false);
 
     useEffect(() => {
         const fetchResults = async() => {
             try {
                 setLoading(true);
-                const results = await searchPosts(query, 0, 3);
+                const results = await searchPosts(query, 0, 6);
                 setResults(results.posts);
                 sethasMore(results.hasMore);
                 // console.log(results);
@@ -42,7 +42,7 @@ const Results = () => {
 
         const nextOffset = results?.length;
 
-        const newPosts = await searchPosts(query, nextOffset, 3);
+        const newPosts = await searchPosts(query, nextOffset, 6);
 
         setResults(prev => [...prev, ...newPosts.posts]);
         sethasMore(newPosts.hasMore);
@@ -50,30 +50,30 @@ const Results = () => {
     };
 
     return (
-        <section className="md:w-[70%]">
-            <h2 className="font-bold mb-3 italic">Search results for <span className="text-my-blue">"{query}"</span></h2>
+        <section className="lg:w-[70%]">
+            <h2 className="font-medium my-3 italic">Search results for <span className="text-my-blue">"{query}"</span></h2>
 
-            <div className="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3">
+            <div className="space-y-3">
                 {loading ? (
-                    <p className="text-my-muted-text">Searching posts...</p>
+                    <p className="text-my-muted-text">Searching...</p>
                 ) : results.length > 0 ? results.map(post => (
-                        <div key={post.slug}>
+                        <div key={post.slug} className="transform transition-all ease-out duration-100 active:scale-[98%] group">
                             <Link href={`/${post.type}/${post.slug}`} className="w-full">
-                                <div className="mb-3" onClick={() => trackPostViews(post.id)}>
-                                    <figure className="w-full h-[200px] xs:h-[175px] md:h-[150px] lg:h-[175px] object-cover overflow-hidden rounded-xl">
+                                <div className="flex gap-3" onClick={() => trackPostViews(post.id)}>
+                                    <figure className="flex-1 w-full max-w-[160px] h-[120px] object-cover overflow-hidden rounded-lg">
                                         <Image
                                             src={post.featuredImage.url || null}
                                             alt=""
                                             width={600}
-                                            height={300}
+                                            height={100}
                                             className="object-cover"
                                             style={{ width: '100%', height: "100%" }}
                                         />
                                     </figure>
 
-                                    <div className="my-2 space-y-2">
+                                    <div className="flex-1 space-y-2">
                                         <p className="text-xs text-my-text capitalize border border-my-muted-text px-3 py-1 w-fit rounded">{post.type}</p>
-                                        <h2 className="text-sm font-medium line-clamp-1">{post.heading}</h2>
+                                        <h2 className="text-sm font-medium line-clamp-2 group-active:text-my-pink">{post.heading}</h2>
 
                                         <div className="text-sm text-my-muted-text line-clamp-2">
                                             {post.content.map((c, index) =>
@@ -83,8 +83,6 @@ const Results = () => {
                                     </div>
                                 </div>
                             </Link>
-
-                            {/* <hr className="w-full h-1 bg-my-content border-none mb-3" /> */}
                         </div>
                     )) : (
                         <p className="text-xs text-my-muted-text">No post found!</p>
@@ -93,7 +91,7 @@ const Results = () => {
             </div>
 
             <div className="w-full h-10 flex items-center gri justify-center my-5 overflow-hidden">
-                {loadingMore ? (
+                {loadingMore || loading ? (
                     <div className="loader"></div>
                 ) : hasMore ? (
                     <button onClick={handleLoadMore} className="px-5 py-2 text-xs border border-my-text rounded cursor-pointer">Load more</button>

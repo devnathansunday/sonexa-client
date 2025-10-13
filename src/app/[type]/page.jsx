@@ -1,5 +1,5 @@
 import { fetchPosts } from "@/lib/api/posts";
-import LoadMorePosts from "@/components/helper/LoadMorePosts";
+import LoadMorePosts from "./LoadMorePosts";
 
 const Posts = async({ params }) => {
     const { type } = await params;

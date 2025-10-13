@@ -1,4 +1,5 @@
 import "./globals.css";
+import Script from "next/script";
 import localFont from 'next/font/local';
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -62,8 +63,10 @@ export default async function RootLayout({ children }) {
         <PageLoader />
 
         <TrackViewProvider>
-          <section className="w-full h-full mx-auto p-3 gap-x-4 flex flex-col lg:flex-row max-w-[1280px]">
+          <section className="w-full h-full mx-auto p-3 gap-x-3.5 flex flex-col lg:flex-row max-w-[1280px]">
             {children}
+
+            <hr className="w-full h-1 mx-auto border-none outline-none bg-my-content my-4 lg:ms-1 lg:w-[1px] lg:h-auto rounded-full" />
 
             <aside className="flex-1 lg:w-[30%]">
               <Guides guides={guides} />
@@ -77,6 +80,8 @@ export default async function RootLayout({ children }) {
         <footer>
           <Footer />
         </footer>
+
+        <Script src="https://www.instagram.com/embed.js" strategy="lazyOnload" />
       </body>
     </html>
   );

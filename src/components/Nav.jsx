@@ -189,15 +189,15 @@ const Nav = () => {
 
                         <div className="text-my-muted-text my-5">
                             <div className="flex items-center gap-3">
-                                <Link onClick={closeMenu} href="/about">About</Link>
+                                <Link onClick={closeMenu} href="/about" className="active:text-my-pink">About</Link>
                                 <hr className="w-1 h-1 rounded-full border-none bg-my-muted-text" />
-                                <Link onClick={closeMenu} href="/contact">Contact</Link>
+                                <Link onClick={closeMenu} href="/contact" className="active:text-my-pink">Contact</Link>
                             </div>
 
                             <div className="flex items-center gap-3">
-                                <Link onClick={closeMenu} href="/privacy">Privacy</Link>
+                                <Link onClick={closeMenu} href="/privacy" className="active:text-my-pink">Privacy</Link>
                                 <hr className="w-1 h-1 rounded-full border-none bg-my-muted-text" />
-                                <Link onClick={closeMenu} href="/disclaimer">Disclaimer</Link>
+                                <Link onClick={closeMenu} href="/disclaimer" className="active:text-my-pink">Disclaimer</Link>
                             </div>
                         </div>
 
