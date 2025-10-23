@@ -1,6 +1,10 @@
+'use client'
 import Link from "next/link";
+import { useLoading } from "@/context/LoadingContext";
 
 const Extras = () => {
+    const { startLoading } = useLoading();
+
     return (
         <section className="my-2">
             <div className="newsletter my-3 p-6 bg-black/25 rounded-xl">
@@ -18,19 +22,19 @@ const Extras = () => {
                 <p className="text-sm text-my-text mb-4 font-light">Stay connected on social media.</p>
                 
                 <div className="flex items-center gap-2 my-2">
-                    <a href="#" target="_blank">
+                    <a href="https://www.facebook.com/profile.php?id=61582635120782" target="_blank">
                         <figure className="w-12 h-12 p-3 border border-my-text rounded-full">
                             <img src="/svgs/facebook.svg" className="w-full h-full" alt="" />
                         </figure>
                     </a>
 
-                    <a href="#" target="_blank">
+                    <a href="https://www.instagram.com/sonexa_wave" target="_blank">
                         <figure className="w-12 h-12 p-3 border border-my-text rounded-full">
                             <img src="/svgs/instagram.svg" className="w-full h-full" alt="" />
                         </figure>
                     </a>
 
-                    <a href="#" target="_blank">
+                    <a href="https://www.x.com/sonexa_wave" target="_blank">
                         <figure className="w-12 h-12 p-3 border border-my-text rounded-full">
                             <img src="/svgs/x.svg" alt="" className="w-full h-full" />
                         </figure>
@@ -48,10 +52,10 @@ const Extras = () => {
                 <h4 className="font-bold text-sm mb-3">CATEGORIES</h4>
                 
                 <div className="text-sm text-my-blue flex flex-wrap gap-2">
-                    <Link href='/song' className="w-fit"><button className="w-fit text-xs border border-my-blue px-6 py-2 rounded-full cursor-pointer">Songs</button></Link>
-                    <Link href='/news' className="w-fit"><button className="w-fit text-xs border border-my-blue px-6 py-2 rounded-full cursor-pointer">News</button></Link>
-                    <Link href='/video' className="w-fit"><button className="w-fit text-xs border border-my-blue px-6 py-2 rounded-full cursor-pointer">Videos</button></Link>
-                    <Link href='/guide' className="w-fit"><button className="w-fit text-xs border border-my-blue px-6 py-2 rounded-full cursor-pointer">Guides</button></Link>
+                    <Link href='/song' className="w-fit"><button onClick={() => startLoading()} className="w-fit text-xs border border-my-blue px-6 py-2 rounded-full cursor-pointer">Songs</button></Link>
+                    <Link href='/news' className="w-fit"><button onClick={() => startLoading()} className="w-fit text-xs border border-my-blue px-6 py-2 rounded-full cursor-pointer">News</button></Link>
+                    <Link href='/video' className="w-fit"><button onClick={() => startLoading()} className="w-fit text-xs border border-my-blue px-6 py-2 rounded-full cursor-pointer">Videos</button></Link>
+                    <Link href='/guide' className="w-fit"><button onClick={() => startLoading()} className="w-fit text-xs border border-my-blue px-6 py-2 rounded-full cursor-pointer">Guides</button></Link>
                 </div>
             </div>
         </section>

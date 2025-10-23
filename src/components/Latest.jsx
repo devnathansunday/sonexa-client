@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useTrackView } from "@/context/TrackViewContext";
+import { useLoading } from "@/context/LoadingContext";
 
 const Latest = ({ sortedPosts }) => {
     if (!sortedPosts ) {
@@ -13,6 +14,8 @@ const Latest = ({ sortedPosts }) => {
     }
 
     const { trackPostViews } = useTrackView();
+    const { startLoading } = useLoading();
+
     const recentPosts = sortedPosts;
     const containerWidth = Math.min(recentPosts.length, 9) * 100 + '%';
 
@@ -28,7 +31,10 @@ const Latest = ({ sortedPosts }) => {
                     {recentPosts?.map(post => (
                         <article key={post.id} className="snap-center w-[80%] shrink-0 xs:w-[60%] sm:w-[45%] md:w-[35%] lg:w-[40%] xl:w-[35%] transform transition-all ease-out duration-100 active:scale-[98%] group">
                             <Link href={`/${post.type}/${post.slug}`} key={post.slug} className="w-full">
-                                <div className="relative flex flex-col gap-2" onClick={() => trackPostViews(post.id)}>
+                                <div className="relative flex flex-col gap-2" onClick={() => {
+                                    trackPostViews(post.id);
+                                    startLoading();
+                                }}>
                                     <figure className="w-full rounded-xl overflow-hidden">
                                         <Image
                                             src={post.featuredImage.url || null}
@@ -43,7 +49,7 @@ const Latest = ({ sortedPosts }) => {
 
                                     <p className={`absolute top-2 left-2 bg-my-pink text-xs font-medium text-my-text z-20 px-4 py-2 w-fit rounded-full shadow-md ${post.type === 'ep' ? 'uppercase' : 'capitalize'}`}>{post.type}</p>
 
-                                    <h3 className="text-bold line-clamp-2 group-active:text-my-pink">{post.heading}</h3>
+                                    <h3 className="text-bold text-lg line-clamp-2 group-active:text-my-pink">{post.heading}</h3>
                                 </div>
                             </Link>
                         </article>

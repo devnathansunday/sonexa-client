@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useTrackView } from "@/context/TrackViewContext";
+import { useLoading } from "@/context/LoadingContext";
 
 const Video = ({ posts }) => {
     if (!posts ) {
@@ -12,6 +13,7 @@ const Video = ({ posts }) => {
         )
     }
     const { trackPostViews } = useTrackView();
+    const { startLoading } = useLoading();
     const videoPosts = posts?.posts;
 
     return (
@@ -19,7 +21,10 @@ const Video = ({ posts }) => {
             {videoPosts.length > 0 ? videoPosts.map(post => (
                 <article key={post.id} className="featured-post relative cursor-pointer transform transition-all ease-out duration-100 active:scale-[98%] group">
                     <Link href={`/${post.type}/${post.slug}`} key={post.slug} className="w-full">
-                        <div onClick={() => trackPostViews(post.id)}>
+                        <div onClick={() => {
+                            trackPostViews(post.id);
+                            startLoading();
+                        }}>
                             <figure className="w-full rounded overflow-hidden">
                                 <Image
                                     src={post.featuredImage.url || null}

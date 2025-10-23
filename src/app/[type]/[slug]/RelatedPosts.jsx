@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useTrackView } from "@/context/TrackViewContext";
+import { useLoading } from "@/context/LoadingContext";
 import { useEffect, useState } from "react";
 import { getRelatedPosts } from "@/lib/api/posts";
 
@@ -10,6 +11,7 @@ export default function RelatedPosts({ postId }) {
     const [loading, setLoading] = useState(true);
 
     const { trackPostViews } = useTrackView();
+    const { startLoading } = useLoading();
 
     useEffect(() => {
         const fetchPosts = async() => {
@@ -46,7 +48,10 @@ export default function RelatedPosts({ postId }) {
                 
                 : related.length > 0 ? related?.map(post => (
                     <Link href={`/guides/${post.slug}`} key={post.slug} className="transform transition-all ease-out duration-100 active:scale-[98%] group">
-                        <div className="flex gap-3 relative" onClick={() => trackPostViews(post.id)}>
+                        <div className="flex gap-3 relative" onClick={() => {
+                            trackPostViews(post.id);
+                            startLoading();
+                        }}>
                             <p className={`px-3 py-1 bg-my-pink shadow-lg rounded-full absolute top-1.5 left-1.5 text-xs ${post.type === 'ep' ? 'uppercase' : 'capitalize'}`}>{post.type}</p>
                             <figure className="flex-1 w-full max-w-[140px] h-[100px] lg:h-[100px] object-cover overflow-hidden rounded-xl">
                                 <Image

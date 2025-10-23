@@ -15,7 +15,7 @@ const Page = async({ params }) => {
     
 
     return (
-        <section className="mt-5 lg:w-[70%]">
+        <section className="mt-2 lg:w-[70%]">
             <PostContent post={post} postHeading={postHeading} postUrl={postUrl} />
             <RelatedPosts postId={post.id} />
         </section>

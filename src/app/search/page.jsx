@@ -1,9 +1,10 @@
 import { Suspense } from "react";
 import Results from "./Results";
+import PostListSkeleton from "@/components/helper/PostListSkeleton";
 
 const SearchPage = () => {
     return (
-        <Suspense fallback={<p className="text-xs text-my-muted-text italic">Fetching...</p>}>
+        <Suspense fallback={<div className="loader"></div>}>
             <Results />
         </Suspense>
     )

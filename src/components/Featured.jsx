@@ -4,6 +4,7 @@ import { useSwipeable } from "react-swipeable";
 import Link from "next/link";
 import Image from "next/image";
 import { useTrackView } from "@/context/TrackViewContext";
+import { useLoading } from "@/context/LoadingContext";
 
 const Featured = ({ posts }) => {
     if (!posts ) {
@@ -15,6 +16,8 @@ const Featured = ({ posts }) => {
     }
 
     const { trackPostViews } = useTrackView();
+    const { startLoading } = useLoading();
+
     const originalSlides = posts;
 
     const slides =
@@ -87,7 +90,7 @@ const Featured = ({ posts }) => {
     };
 
     return (
-        <section className="featured-posts my-3 relative w-full overflow-hidden rounded-xl transform transition-all ease-out duration-100 active:scale-[98%] group">
+        <section className="featured-posts relative w-full overflow-hidden rounded-xl transform transition-all ease-out duration-100 active:scale-[98%] group">
             <div className="absolute top-3 left-3 z-30 flex items-center bg-my-text p-2 rounded-full">
                 <img src="/svgs/fire.svg" alt="" />
             </div>
@@ -108,7 +111,10 @@ const Featured = ({ posts }) => {
                         style={{ width: `${slideWidth}%` }}
                     >
                         <Link href={`/${slide?.type}/${slide.slug}`} key={slide.slug} className="w-full">
-                            <div className="post relative w-full rounded-xl overflow-hidden" onClick={() => trackPostViews(slide.id)}>
+                            <div className="post relative w-full rounded-xl overflow-hidden" onClick={() => {
+                                trackPostViews(slide.id);
+                                startLoading();
+                            }}>
                                 <figure className="w-full rounded-xl overflow-hidden">
                                     <Image
                                         src={slide.featuredImage.url || null}
@@ -122,7 +128,7 @@ const Featured = ({ posts }) => {
                                 <div className="absolute top-0 bottom-0 right-0 left-0 px-5 py-16 bg-gradient-to-b from-transparent to-black flex justify-end flex-col gap-1">
                                     <p className={`text-xs font-medium text-my-yellow capitalize pb-2 pe-2 border-b border-r w-fit rounded-br ${slide.type === 'ep' ? 'uppercase' : ''}`}>{slide.type}</p>
                                     
-                                    <h3 className="font-bold line-clamp-2 group-active:text-my-pink">{slide.heading}</h3>
+                                    <h3 className="font-bold text-xl line-clamp-2 group-active:text-my-pink">{slide.heading}</h3>
                                 </div>
                             </div>
                         </Link>

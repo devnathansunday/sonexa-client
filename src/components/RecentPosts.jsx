@@ -4,10 +4,13 @@ import Link from "next/link";
 import Music from "./Music";
 import News from "./News";
 import Video from "./Video";
+import { useLoading } from "@/context/LoadingContext";
 
 const RecentPosts = ({ songs, news, videos }) => {
     const [active, setActive] = useState(0);
     const postsSectionRef = useRef(null);
+
+    const { startLoading } = useLoading();
 
     const scrollToTopOfPosts = () => {
         postsSectionRef.current?.scrollIntoView({
@@ -33,7 +36,7 @@ const RecentPosts = ({ songs, news, videos }) => {
                     {active === 0 ? (<div className="flex flex-col gap-2">
                         <Music posts={songs} />
 
-                        <Link href={`/song`} className="ms-auto"><button className="mx-3 my-2 px-5 h-8 border text-end text-xs w-fit rounded-full cursor-pointer transform transition-all ease-out duration-100 active:scale-[98%]">More</button></Link>
+                        <Link href={`/song`} className="ms-auto"><button onClick={() => startLoading()} className="mx-3 my-2 px-5 h-8 border text-end text-xs w-fit rounded-full cursor-pointer transform transition-all ease-out duration-100 active:scale-[98%]">More</button></Link>
                     </div>)
 
                         : active === 1 ?
@@ -41,7 +44,7 @@ const RecentPosts = ({ songs, news, videos }) => {
                     (<div className="flex flex-col gap-2">
                         <News posts={news} />
 
-                        <Link href={`/news`} className="ms-auto"><button className="mx-3 my-2 px-5 h-8 border text-end text-xs w-fit rounded-full cursor-pointer transform transition-all ease-out duration-100 active:scale-[98%]">More</button></Link>
+                        <Link href={`/news`} className="ms-auto"><button onClick={() => startLoading()} className="mx-3 my-2 px-5 h-8 border text-end text-xs w-fit rounded-full cursor-pointer transform transition-all ease-out duration-100 active:scale-[98%]">More</button></Link>
                     </div>)
 
                         :
@@ -49,7 +52,7 @@ const RecentPosts = ({ songs, news, videos }) => {
                     (<div className="flex flex-col gap-2">
                         <Video posts={videos} />
 
-                        <Link href={`/video`} className="ms-auto"><button className="mx-3 my-2 px-5 h-8 border text-end text-xs w-fit rounded-full cursor-pointer transform transition-all ease-out duration-100 active:scale-[98%]">More</button></Link>
+                        <Link href={`/video`} className="ms-auto"><button onClick={() => startLoading()} className="mx-3 my-2 px-5 h-8 border text-end text-xs w-fit rounded-full cursor-pointer transform transition-all ease-out duration-100 active:scale-[98%]">More</button></Link>
                     </div>)
                     }
                 </div>

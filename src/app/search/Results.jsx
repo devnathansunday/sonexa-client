@@ -3,14 +3,17 @@ import { useSearchParams } from "next/navigation";
 import { searchPosts } from "@/lib/api/posts";
 import { useEffect, useState } from "react";
 import { useTrackView } from "@/context/TrackViewContext";
+import { useLoading } from "@/context/LoadingContext";
 import Link from "next/link";
 import Image from "next/image";
+import PostListSkeleton from "@/components/helper/PostListSkeleton";
 
 const Results = () => {
     const searchParams = useSearchParams();
     const query = searchParams.get("query");
     
     const { trackPostViews } = useTrackView();
+    const { startLoading } = useLoading();
     
     const [results, setResults] = useState([]);
     const [loadingMore, setLoadingMore] = useState(false);
@@ -55,11 +58,14 @@ const Results = () => {
 
             <div className="space-y-3">
                 {loading ? (
-                    <p className="text-my-muted-text">Searching...</p>
+                    <PostListSkeleton />
                 ) : results.length > 0 ? results.map(post => (
                         <div key={post.slug} className="transform transition-all ease-out duration-100 active:scale-[98%] group">
                             <Link href={`/${post.type}/${post.slug}`} className="w-full">
-                                <div className="flex gap-3" onClick={() => trackPostViews(post.id)}>
+                                <div className="flex gap-3" onClick={() => {
+                                    trackPostViews(post.id);
+                                    startLoading();
+                                }}>
                                     <figure className="flex-1 w-full max-w-[160px] h-[120px] object-cover overflow-hidden rounded-lg">
                                         <Image
                                             src={post.featuredImage.url || null}

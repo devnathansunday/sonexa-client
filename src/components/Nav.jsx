@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from 'next/navigation'
 import Link from "next/link";
+import { useLoading } from "@/context/LoadingContext";
 
 const Nav = () => {
     const [searchOpen, setSearchOpen] = useState(false);
@@ -10,6 +11,8 @@ const Nav = () => {
     const inputRef = useRef(null);
 
     const router = useRouter();
+
+    const { startLoading } = useLoading();
 
     useEffect(() => {
         if (searchOpen && inputRef.current) {
@@ -42,8 +45,9 @@ const Nav = () => {
         setMenuOpen(false);
     }
 
-    const handleSearch = () => {
+    const handleSearch = (e) => {
         if (!query.trim()) return;
+
         router.push(`/search?query=${encodeURIComponent(query)}`);
         setSearchOpen(false);
     }
@@ -56,49 +60,68 @@ const Nav = () => {
                     
                     {/* desktop nav */}
                     <div className="hidden h-full lg:flex md:items-center gap-12 font-bold text-sm text-my-muted-text">
-                        <button className="w-fit hover:text-my-pink active:text-my-pink">
-                            <Link href="/">Home</Link>
-                        </button>
+                        <Link href="/">
+                            <button onClick={() => startLoading()} className="w-fit hover:text-my-pink active:text-my-pink cursor-pointer">
+                                Home
+                            </button>
+                        </Link>
 
                         <div className="w-fit h-full cursor-pointer flex justify-center items-center relative hover:border-b hover:border-my-text group">
                             <button className="cursor-pointer">Categories</button>
 
                             <div className="absolute top-16 left-0 w-[225px] h-0 bg-my-content overflow-hidden group-hover:h-max opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out">
                                 <div className="flex flex-col">
-                                    <Link href={`/song`} className="w-full p-3 text-start hover:bg-my-pink hover:text-my-text">
-                                        Songs
-                                        <p className="text-my-muted-text font-light text-xs">Browse music</p>
+                                    <Link href={`/song`}>
+                                        <button onClick={() => startLoading()} className="w-full p-3 text-start hover:bg-my-pink hover:text-my-text cursor-pointer">
+                                            Songs
+                                            <p className="text-my-muted-text font-light text-xs">Browse music</p>
+                                        </button>
                                     </Link>
 
                                     <hr className="w-full h-[1px] outline-0 border-0 bg-my-muted-text/20" />
 
-                                    <Link href={`/news`} className="w-full p-3 text-start hover:bg-my-pink hover:text-my-text">
-                                        News
-                                        <p className="text-my-muted-text font-light text-xs">See latest news</p>
+                                    <Link href={`/news`}>
+                                        <button onClick={() => startLoading()} className="w-full p-3 text-start hover:bg-my-pink hover:text-my-text cursor-pointer">
+                                            News
+                                            <p className="text-my-muted-text font-light text-xs">See latest news</p>
+                                        </button>
                                     </Link>
 
                                     <hr className="w-full h-[1px] outline-0 border-0 bg-my-muted-text/20" />
 
-                                    <Link href={`/video`} className="w-full p-3 text-start hover:bg-my-pink hover:text-my-text">
-                                        Videos
-                                        <p className="text-my-muted-text font-light text-xs">Browse videos</p>
+                                    <Link href={`/video`}>
+                                        <button onClick={() => startLoading()} className="w-full p-3 text-start hover:bg-my-pink hover:text-my-text cursor-pointer">
+                                            Videos
+                                            <p className="text-my-muted-text font-light text-xs">Browse videos</p>
+                                        </button>
                                     </Link>
                                 </div>
                             </div>
                         </div>
 
-                        <button className="w-fit hover:text-my-pink active:text-my-pink">
-                            <Link href={`/about`}>About</Link>
-                        </button>
-                        <button className="w-fit hover:text-my-pink active:text-my-pink">
-                            <Link href={`/contact`}>Contact</Link>
-                        </button>
-                        <button className="w-fit hover:text-my-pink active:text-my-pink">
-                            <Link href={`/advertise`}>Advertise with us</Link>
-                        </button>
-                        <button className="w-fit hover:text-my-pink active:text-my-pink">
-                            <Link href={`/advertise`}>Disclaimer</Link>
-                        </button>
+                        <Link href={`/about`}>
+                            <button onClick={() => startLoading()} className="w-fit hover:text-my-pink active:text-my-pink cursor-pointer">
+                                About
+                            </button>
+                        </Link>
+
+                        <Link href={`/contact`}>
+                            <button onClick={() => startLoading()} className="w-fit hover:text-my-pink active:text-my-pink cursor-pointer">
+                                Contact
+                            </button>
+                        </Link>
+
+                        <Link href={`/advertise`}>
+                            <button onClick={() => startLoading()} className="w-fit hover:text-my-pink active:text-my-pink cursor-pointer">
+                                Advertise with us
+                            </button>
+                        </Link>
+
+                        <Link href={`/advertise`}>
+                            <button onClick={() => startLoading()} className="w-fit hover:text-my-pink active:text-my-pink cursor-pointer">
+                                Disclaimer
+                            </button>
+                        </Link>
                     </div>
 
                     <div className="hidden h-10 lg:flex md:items-center bg-my-content overflow-hidden rounded-full">
@@ -112,6 +135,7 @@ const Nav = () => {
                             onChange={(e) => setQuery(e.target.value)}
                             onKeyDown={(e) => {
                             if (e.key === "Enter") {
+                                    e.target.blur();
                                     handleSearch();
                                 }
                             }}
@@ -146,6 +170,7 @@ const Nav = () => {
                             onChange={(e) => setQuery(e.target.value)}
                             onKeyDown={(e) => {
                             if (e.key === "Enter") {
+                                    e.target.blur();
                                     handleSearch();
                                 }
                             }}
@@ -170,34 +195,67 @@ const Nav = () => {
                         </div>
 
                         <div className="flex flex-col justify-center gap-2 my-5 font-medium">
-                            <button onClick={closeMenu} className="w-fit hover:text-my-pink active:text-my-pink">
-                                <Link href="/">Home</Link>
-                            </button>
-                            <button onClick={closeMenu} className="w-fit hover:text-my-pink active:text-my-pink">
-                                <Link href={`/song`}>Songs</Link>
-                            </button>
-                            <button onClick={closeMenu} className="w-fit hover:text-my-pink active:text-my-pink">
-                                <Link href={`/news`}>News</Link>
-                            </button>
-                            <button onClick={closeMenu} className="w-fit hover:text-my-pink active:text-my-pink">
-                                <Link href={`/video`}>Videos</Link>
-                            </button>
-                            <button onClick={closeMenu} className="w-fit hover:text-my-pink active:text-my-pink">
-                                <Link href={`/guide`}>Guides</Link>
-                            </button>
+                            <Link href="/">
+                                <button onClick={() => {
+                                    closeMenu();
+                                    startLoading();
+                                }} className="w-fit hover:text-my-pink active:text-my-pink">
+                                    Home
+                                </button>
+                            </Link>
+                            <Link href={`/song`}>
+                                <button onClick={() => {
+                                    closeMenu();
+                                    startLoading();
+                                }} className="w-fit hover:text-my-pink active:text-my-pink">
+                                    Songs
+                                </button>
+                            </Link>
+                            <Link href={`/news`}>
+                                <button onClick={() => {
+                                    closeMenu();
+                                    startLoading();
+                                }} className="w-fit hover:text-my-pink active:text-my-pink">
+                                    News
+                                </button>
+                            </Link>
+                            <Link href={`/video`}>
+                                <button onClick={() => {
+                                    closeMenu();
+                                    startLoading();
+                                }} className="w-fit hover:text-my-pink active:text-my-pink">
+                                    Videos
+                                </button>
+                            </Link>
+                            <Link href={`/guide`}>
+                                <button onClick={() => {
+                                    closeMenu();
+                                    startLoading();
+                                }} className="w-fit hover:text-my-pink active:text-my-pink">
+                                    Guides
+                                </button>
+                            </Link>
                         </div>
 
                         <div className="text-my-muted-text my-5">
                             <div className="flex items-center gap-3">
-                                <Link onClick={closeMenu} href="/about" className="active:text-my-pink">About</Link>
+                                <Link onClick={closeMenu} href="/about" className="active:text-my-pink">
+                                    <button onClick={() => startLoading()}>About</button>
+                                </Link>
                                 <hr className="w-1 h-1 rounded-full border-none bg-my-muted-text" />
-                                <Link onClick={closeMenu} href="/contact" className="active:text-my-pink">Contact</Link>
+                                <Link onClick={closeMenu} href="/contact" className="active:text-my-pink">
+                                    <button onClick={() => startLoading()}>Contact</button>
+                                </Link>
                             </div>
 
                             <div className="flex items-center gap-3">
-                                <Link onClick={closeMenu} href="/privacy" className="active:text-my-pink">Privacy</Link>
+                                <Link onClick={closeMenu} href="/privacy" className="active:text-my-pink">
+                                    <button onClick={() => startLoading()}>Privacy</button>
+                                </Link>
                                 <hr className="w-1 h-1 rounded-full border-none bg-my-muted-text" />
-                                <Link onClick={closeMenu} href="/disclaimer" className="active:text-my-pink">Disclaimer</Link>
+                                <Link onClick={closeMenu} href="/disclaimer" className="active:text-my-pink">
+                                    <button onClick={() => startLoading()}>Disclaimer</button>
+                                </Link>
                             </div>
                         </div>
 

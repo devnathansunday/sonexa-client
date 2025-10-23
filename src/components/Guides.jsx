@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useTrackView } from "@/context/TrackViewContext";
+import { useLoading } from "@/context/LoadingContext";
 
 const Guides = ({ guides }) => {
     if (!guides ) {
@@ -13,6 +14,7 @@ const Guides = ({ guides }) => {
     }
     
     const { trackPostViews } = useTrackView();
+    const { startLoading } = useLoading();
 
     return (
         <section className="my-3 p-4 bg-black/25 rounded-xl">
@@ -30,7 +32,10 @@ const Guides = ({ guides }) => {
             <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3 lg:grid-cols-1">
                 {guides?.posts?.length > 0 ? guides.posts.map(guide => (
                     <Link href={`/guides/${guide.slug}`} key={guide.slug} className="transform transition-all ease-out duration-100 active:scale-[98%] group">
-                        <div className="flex gap-3" onClick={() => trackPostViews(guide.id)}>
+                        <div className="flex gap-3" onClick={() => {
+                            trackPostViews(guide.id);
+                            startLoading();
+                        }}>
                             <figure className="flex-1 w-full max-w-[140px] h-[100px] lg:h-[100px] object-cover overflow-hidden rounded-xl">
                                 <Image
                                     src={guide.featuredImage.url}

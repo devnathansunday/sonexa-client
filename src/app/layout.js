@@ -8,6 +8,8 @@ import PageLoader from "@/components/helper/PageLoader";
 import Extras from "@/components/Extras";
 import Guides from "@/components/Guides";
 import { TrackViewProvider } from "@/context/TrackViewContext";
+import { useLoading, LoadingProvider } from '@/context/LoadingContext';
+import NavigationHandler from "@/components/NavigationHandler";
 import { getPopularPosts, fetchPosts } from "@/lib/api/posts";
 
 const clashDisplay = localFont({
@@ -57,29 +59,33 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en" className={`scroll-smooth ${clashDisplay.className} ${clashDisplay.variable}`}>
       <body className="w-full h-full bg-my-bg text-my-text font-clash antialiased overflow-x-hidden">
-        <header className="text-my-text sticky top-0 left-0 right-0 z-[999]">
-          <Nav />
-        </header>
-        <PageLoader />
+        <LoadingProvider>
+          <header className="text-my-text sticky top-0 left-0 right-0 z-[999]">
+            <Nav />
+          </header>
+          <PageLoader />
 
-        <TrackViewProvider>
-          <section className="w-full h-full mx-auto p-3 gap-x-3.5 flex flex-col lg:flex-row max-w-[1280px]">
-            {children}
+          <TrackViewProvider>
+            <section className="w-full h-full mx-auto p-3 gap-x-3.5 flex flex-col lg:flex-row max-w-[1280px]">
+              {children}
 
-            <hr className="w-full h-1 mx-auto border-none outline-none bg-my-content my-4 lg:ms-1 lg:w-[1px] lg:h-auto rounded-full" />
+              <hr className="w-full h-1 mx-auto border-none outline-none bg-my-content my-4 lg:ms-1 lg:w-[1px] lg:h-auto rounded-full" />
 
-            <aside className="flex-1 lg:w-[30%]">
-              <Guides guides={guides} />
-              <Extras />
-            </aside>
-          </section>
+              <aside className="flex-1 lg:w-[30%]">
+                <Guides guides={guides} />
+                <Extras />
+              </aside>
+            </section>
 
-          <Popular popularPosts={popularPosts} />
-        </TrackViewProvider>
+            <Popular popularPosts={popularPosts} />
+          </TrackViewProvider>
 
-        <footer>
-          <Footer />
-        </footer>
+          <footer>
+            <Footer />
+          </footer>
+          
+          <NavigationHandler />
+        </LoadingProvider>
 
         <Script src="https://www.instagram.com/embed.js" strategy="lazyOnload" />
       </body>

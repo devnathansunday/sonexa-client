@@ -11,13 +11,13 @@ const PostContent = ({ post, postHeading, postUrl }) => {
 
     return (
         <section className="space-y-2 mb-16">
-            <p className="date text-xs">{new Date(post.createdAt).toLocaleString('en-GB', {
+            <p className="date text-sm">{new Date(post.createdAt).toLocaleString('en-GB', {
                 day: '2-digit',
                 month: 'long',
                 year: 'numeric'
             })}</p>
 
-            <h2 className="font-bold text-xl">{post.heading}</h2>
+            <h2 className="font-bold text-4xl">{post.heading}</h2>
 
             <figure className="w-full h-[300px] xs:h-[350px] md:h-[400px] mb-5 overflow-hidden rounded-xl">
                 <img src={post.featuredImage.url} className="w-full h-full object-cover" alt="" />
@@ -108,22 +108,39 @@ const PostContent = ({ post, postHeading, postUrl }) => {
                 }
             </div>
 
-            {post.content.map((block, i) => {
-                if (block.type === 'link' && block.linkType === 'download') {
-                    const url = block.url;
+            <div className="my-10">
+                {(post.type === 'ep' || post.type === 'album') && (post.content.some(block => block.type === 'link' && block.linkType === 'download' && block.songTitle !== null)) && (
+                    <p className="mb-3 text-my-muted-text font-bold">Download/stream below.</p>
+                )}
 
-                    return (
-                        <div key={i} className="w-full flex flex-col gap-y-8 justify-center items-center my-10">
-                            <audio controls preload="none" className="width:100%; border-radius:12px;">
-                                <source src={url} type="audio/mpeg"/>
-                                Your browser does not support the audio element.
-                            </audio>
+                {post.content.map((block, i) => {
+                    if (block.type === 'link' && block.linkType === 'download') {
+                        const url = block.url;
 
-                            <a href={url} target="_blank" className="font-extrabold text-my-pink text-lg active:text-my-blue active:scale-95">Download</a>
-                        </div>
-                    );
-                }
-            })}
+                        if (post.type === 'ep' || post.type === 'album') {
+                            const songTitle = block.songTitle;
+
+                            return (
+                                <div key={i} className="w-full mb-2">
+                                    <a href={url} target="_blank" className="font-extrabold text-my-pink text-lg underline active:text-my-blue active:scale-95">{songTitle}</a>
+                                </div>
+                            );
+
+                        } else {
+                            return (
+                                <div key={i} className="w-full flex flex-col gap-y-8 justify-center items-center my-10">
+                                    <audio controls preload="none" className="width:100%; border-radius:12px;">
+                                        <source src={url} type="audio/mpeg"/>
+                                        Your browser does not support the audio element.
+                                    </audio>
+    
+                                    <a href={url} target="_blank" className="font-extrabold text-my-pink text-lg active:text-my-blue active:scale-95">Download</a>
+                                </div>
+                            );
+                        }
+                    }
+                })}
+            </div>
 
             <div className="my-10">
                 <p className="text-base font-bold mb-4">Share:</p>

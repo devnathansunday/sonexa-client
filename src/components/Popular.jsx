@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useTrackView } from "@/context/TrackViewContext";
+import { useLoading } from "@/context/LoadingContext";
 
 const Popular = ({ popularPosts }) => {
     if (!popularPosts ) {
@@ -13,6 +14,7 @@ const Popular = ({ popularPosts }) => {
     }
 
     const { trackPostViews } = useTrackView();
+    const { startLoading } = useLoading();
 
     return (
         <section className="mx-auto max-w-[1280px]">
@@ -22,7 +24,10 @@ const Popular = ({ popularPosts }) => {
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {popularPosts.length > 0 && popularPosts.map(post => (
                         <Link href={`/${post.type}/${post.slug}`} key={post.id} className="flex-1 transform transition-all ease-out duration-100 active:scale-[98%] group">
-                            <div className="flex gap-3" onClick={() => trackPostViews(post.id)}>
+                            <div className="flex gap-3" onClick={() => {
+                                trackPostViews(post.id);
+                                startLoading();
+                            }}>
                                 <figure className="flex-1 w-full max-w-[180px] h-[120px] object-cover overflow-hidden rounded-lg">
                                     <Image
                                         src={post.featuredImage.url}

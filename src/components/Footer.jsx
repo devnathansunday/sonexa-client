@@ -1,11 +1,9 @@
-import Link from "next/link";
-
 const Footer = () => {
     return (
-        <section className="my-3 p-6 bg-black/25">
+        <section className="my-3 p-3 bg-black/25">
             <div className="mx-auto max-w-[1280px]">
                 <div className="mx-3">
-                    <div className="my-10 flex flex-wrap gap-x-[30%] md:gap-x-[15%] gap-y-6">
+                    <div className="my-10 flex flex-col xs:flex-row xs:flex-wrap gap-x-32 gap-y-10 xs:gap-y-14">
                         <div>
                             <h4 className="font-bold my-1">Links</h4>
                             <div className="text-sm text-my-muted-text flex flex-col gap-0.5">
