@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Suspense } from "react";
 import Script from "next/script";
 import localFont from 'next/font/local';
 import Nav from "@/components/Nav";
@@ -8,7 +9,7 @@ import PageLoader from "@/components/helper/PageLoader";
 import Extras from "@/components/Extras";
 import Guides from "@/components/Guides";
 import { TrackViewProvider } from "@/context/TrackViewContext";
-import { useLoading, LoadingProvider } from '@/context/LoadingContext';
+import { LoadingProvider } from '@/context/LoadingContext';
 import NavigationHandler from "@/components/NavigationHandler";
 import { getPopularPosts, fetchPosts } from "@/lib/api/posts";
 
@@ -84,7 +85,9 @@ export default async function RootLayout({ children }) {
             <Footer />
           </footer>
           
-          <NavigationHandler />
+          <Suspense fallback={<div className="loader"></div>}>
+            <NavigationHandler />
+          </Suspense>
         </LoadingProvider>
 
         <Script src="https://www.instagram.com/embed.js" strategy="lazyOnload" />
