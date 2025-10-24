@@ -46,6 +46,8 @@ const Nav = () => {
     }
 
     const handleSearch = (e) => {
+        startLoading();
+
         if (!query.trim()) return;
 
         router.push(`/search?query=${encodeURIComponent(query)}`);
@@ -56,10 +58,10 @@ const Nav = () => {
         <div className="relative bg-my-nav border-b-2 border-my-content">
             <div className="mx-auto max-w-[1280px]">
                 <nav className="h-16 flex items-center justify-between px-3">
-                    <a href="/"><h1 className="font-extrabold text-xl">Sonexa</h1></a>
+                    <a href="/"><h1 className="font-extrabold text-xl uppercase">Sonexa</h1></a>
                     
                     {/* desktop nav */}
-                    <div className="hidden h-full lg:flex md:items-center gap-12 font-bold text-sm text-my-muted-text">
+                    <div className="hidden h-full lg:flex md:items-center gap-12 font-bold text-base text-[#d7d7d7]">
                         <Link href="/">
                             <button onClick={() => startLoading()} className="w-fit hover:text-my-pink active:text-my-pink cursor-pointer">
                                 Home
@@ -67,12 +69,12 @@ const Nav = () => {
                         </Link>
 
                         <div className="w-fit h-full cursor-pointer flex justify-center items-center relative hover:border-b hover:border-my-text group">
-                            <button className="cursor-pointer">Categories</button>
+                            <button className="cursor-pointer">Explore</button>
 
                             <div className="absolute top-16 left-0 w-[225px] h-0 bg-my-content overflow-hidden group-hover:h-max opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out">
                                 <div className="flex flex-col">
                                     <Link href={`/song`}>
-                                        <button onClick={() => startLoading()} className="w-full p-3 text-start hover:bg-my-pink hover:text-my-text cursor-pointer">
+                                        <button onClick={() => startLoading()} className="w-full p-3 text-start hover:bg-my-dark hover:text-my-text cursor-pointer">
                                             Songs
                                             <p className="text-my-muted-text font-light text-xs">Browse music</p>
                                         </button>
@@ -81,7 +83,7 @@ const Nav = () => {
                                     <hr className="w-full h-[1px] outline-0 border-0 bg-my-muted-text/20" />
 
                                     <Link href={`/news`}>
-                                        <button onClick={() => startLoading()} className="w-full p-3 text-start hover:bg-my-pink hover:text-my-text cursor-pointer">
+                                        <button onClick={() => startLoading()} className="w-full p-3 text-start hover:bg-my-dark hover:text-my-text cursor-pointer">
                                             News
                                             <p className="text-my-muted-text font-light text-xs">See latest news</p>
                                         </button>
@@ -90,7 +92,7 @@ const Nav = () => {
                                     <hr className="w-full h-[1px] outline-0 border-0 bg-my-muted-text/20" />
 
                                     <Link href={`/video`}>
-                                        <button onClick={() => startLoading()} className="w-full p-3 text-start hover:bg-my-pink hover:text-my-text cursor-pointer">
+                                        <button onClick={() => startLoading()} className="w-full p-3 text-start hover:bg-my-dark hover:text-my-text cursor-pointer">
                                             Videos
                                             <p className="text-my-muted-text font-light text-xs">Browse videos</p>
                                         </button>
@@ -116,12 +118,6 @@ const Nav = () => {
                                 Advertise with us
                             </button>
                         </Link>
-
-                        <Link href={`/advertise`}>
-                            <button onClick={() => startLoading()} className="w-fit hover:text-my-pink active:text-my-pink cursor-pointer">
-                                Disclaimer
-                            </button>
-                        </Link>
                     </div>
 
                     <div className="hidden h-10 lg:flex md:items-center bg-my-content overflow-hidden rounded-full">
@@ -131,7 +127,7 @@ const Nav = () => {
                             value={query} 
                             name="search"
                             placeholder="Search..." 
-                            className="border-none outline-none text-sm px-5 py-3 w-[200px] h-full" 
+                            className="border-none outline-none text-base px-6 py-3 w-[200px] h-full" 
                             onChange={(e) => setQuery(e.target.value)}
                             onKeyDown={(e) => {
                             if (e.key === "Enter") {
@@ -182,18 +178,18 @@ const Nav = () => {
 
                 {/* mobile menu */}
                 <div className={`fixed -top-full left-0 right-0 bg-zinc-900 p-5 opacity-0 z-[1000] transition-all duration-300 ease-out ${menuOpen ? 'top-0 opacity-100 bottom-0' : ''}`}>
-                    <div className="flex flex-col justify-center">
-                        <div className="menu-heading mb-3 flex items-center justify-between">
-                            <div>
-                                <h4 className="font-extrabold">SONEXA</h4>
-                                <p className="text-xs text-my-muted-text font-medium my-1">menu</p>
-                            </div>
-                            
-                            <button onClick={closeMenu}>
-                                <img src="/svgs/cancel.svg" alt="" />
-                            </button>
+                    <div className="menu-heading absolute top-5 left-5 right-5 mb-3 flex items-center justify-between">
+                        <div>
+                            <h4 className="font-extrabold">SONEXA</h4>
+                            <p className="text-xs text-my-muted-text font-medium my-1">menu</p>
                         </div>
+                        
+                        <button onClick={closeMenu}>
+                            <img src="/svgs/cancel.svg" alt="" />
+                        </button>
+                    </div>
 
+                    <div className="w-full h-full flex flex-col justify-center">
                         <div className="flex flex-col justify-center gap-2 my-5 font-medium">
                             <Link href="/">
                                 <button onClick={() => {

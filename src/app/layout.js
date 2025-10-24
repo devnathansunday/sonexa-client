@@ -34,6 +34,17 @@ const clashDisplay = localFont({
   display: 'swap' 
 })
 
+const lora = localFont({
+  src: [
+    { path: './fonts/Lora-Bold.ttf', weight: '900', style: 'normal' },
+    { path: './fonts/Lora-SemiBold.ttf', weight: '600', style: 'normal' },
+    { path: './fonts/Lora-Medium.ttf', weight: '500', style: 'normal' },
+    { path: './fonts/Lora-Regular.ttf', weight: '400', style: 'normal' },
+  ],
+  variable: '--font-lora',
+  display: 'swap'
+})
+
 export const metadata = {
   title: 'Sonexa - Music & Entertainment Blog',
   description: 'Stay updated with the latest news, music releases, videos, and how-to guides from the world of music and entertainment.',
@@ -58,7 +69,7 @@ export default async function RootLayout({ children }) {
   ]);
 
   return (
-    <html lang="en" className={`scroll-smooth ${clashDisplay.className} ${clashDisplay.variable}`}>
+    <html lang="en" className={`scroll-smooth font-clash text-base ${clashDisplay.className} ${clashDisplay.variable} ${lora.className} ${lora.variable}`}>
       <body className="w-full h-full bg-my-bg text-my-text font-clash antialiased overflow-x-hidden">
         <LoadingProvider>
           <header className="text-my-text sticky top-0 left-0 right-0 z-[999]">
@@ -67,11 +78,9 @@ export default async function RootLayout({ children }) {
           <PageLoader />
 
           <TrackViewProvider>
-            <section className="w-full h-full mx-auto p-3 gap-x-3.5 flex flex-col lg:flex-row max-w-[1280px]">
+            <section className="w-full h-full mx-auto p-3 gap-x-4 flex flex-col lg:flex-row max-w-[1280px]">
               {children}
-
-              <hr className="w-full h-1 mx-auto border-none outline-none bg-my-content my-4 lg:ms-1 lg:w-[1px] lg:h-auto rounded-full" />
-
+              
               <aside className="flex-1 lg:w-[30%]">
                 <Guides guides={guides} />
                 <Extras />

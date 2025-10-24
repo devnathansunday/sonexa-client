@@ -66,7 +66,7 @@ const Results = () => {
                                     trackPostViews(post.id);
                                     startLoading();
                                 }}>
-                                    <figure className="flex-1 w-full max-w-[160px] h-[120px] object-cover overflow-hidden rounded-lg">
+                                    <figure className="flex-1 w-full max-w-[160px] h-[125px] object-cover overflow-hidden rounded-lg">
                                         <Image
                                             src={post.featuredImage.url || null}
                                             alt=""
@@ -79,7 +79,7 @@ const Results = () => {
 
                                     <div className="flex-1 space-y-2">
                                         <p className="text-xs text-my-text capitalize border border-my-muted-text px-3 py-1 w-fit rounded">{post.type}</p>
-                                        <h2 className="text-sm font-medium line-clamp-2 group-active:text-my-pink">{post.heading}</h2>
+                                        <h2 className="text-base font-medium font-lora line-clamp-2 group-active:text-my-pink">{post.heading}</h2>
 
                                         <div className="text-sm text-my-muted-text line-clamp-2">
                                             {post.content.map((c, index) =>

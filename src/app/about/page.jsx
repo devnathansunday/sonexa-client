@@ -1,6 +1,6 @@
 const Page = () => {
     return (
-        <section className="mx-3 mt-5 mb-10">
+        <section className="w-full lg:w-[70%] mt-2 mb-10">
             <p>About This Blog</p>
         </section>
     )

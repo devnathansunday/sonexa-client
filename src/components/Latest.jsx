@@ -21,9 +21,13 @@ const Latest = ({ sortedPosts }) => {
 
     return (
         <section className="my-6 overflow-hidden">
-            <div className="flex items-center gap-2 mb-3">
+            <div className="space-y-1.5 mb-4">
                 <h3 className="font-bold text-xl">Latest</h3>
-                <hr className="flex-1 h-[1.5px] bg-my-muted-text border-none outline-none" />
+
+                <div className="flex items-center">
+                    <hr className="w-10 h-[3px] bg-my-text border-none outline-none" />
+                    <hr className="flex-1 h-[3px] bg-my-muted-text/60 border-none outline-none" />
+                </div>
             </div>
 
             <div className="overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden">
@@ -47,9 +51,9 @@ const Latest = ({ sortedPosts }) => {
                                         />
                                     </figure>
 
-                                    <p className={`absolute top-2 left-2 bg-my-pink text-xs font-medium text-my-text z-20 px-4 py-2 w-fit rounded-full shadow-md ${post.type === 'ep' ? 'uppercase' : 'capitalize'}`}>{post.type}</p>
+                                    <p className={`absolute top-2 left-2 bg-my-text text-xs font-medium text-my-dark z-20 px-4 py-2 w-fit rounded-full shadow-md ${post.type === 'ep' ? 'uppercase' : 'capitalize'}`}>{post.type}</p>
 
-                                    <h3 className="text-bold text-lg line-clamp-2 group-active:text-my-pink">{post.heading}</h3>
+                                    <h3 className="font-medium font-lora text-lg line-clamp-2 group-active:text-my-pink">{post.heading}</h3>
                                 </div>
                             </Link>
                         </article>

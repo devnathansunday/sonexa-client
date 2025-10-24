@@ -11,13 +11,12 @@ const PostContent = ({ post, postHeading, postUrl }) => {
 
     return (
         <section className="space-y-2 mb-16">
-            <p className="date text-sm">{new Date(post.createdAt).toLocaleString('en-GB', {
+            <h2 className="font-semibold font-lora text-4xl">{post.heading}</h2>
+            <p className="date text-sm mb-4 text-my-text">{new Date(post.createdAt).toLocaleString('en-GB', {
                 day: '2-digit',
                 month: 'long',
                 year: 'numeric'
             })}</p>
-
-            <h2 className="font-bold text-4xl">{post.heading}</h2>
 
             <figure className="w-full h-[300px] xs:h-[350px] md:h-[400px] mb-5 overflow-hidden rounded-xl">
                 <img src={post.featuredImage.url} className="w-full h-full object-cover" alt="" />
@@ -96,7 +95,9 @@ const PostContent = ({ post, postHeading, postUrl }) => {
 
                             if (block.linkType === 'streaming') {
                                 return (
-                                <a href={url} key={i} target="_blank" rel="noopener noreferrer" className="underline font-extrabold text-my-pink text-lg active:text-my-blue active:scale-95">Stream</a>
+                                    <div key={i} className="mx-auto text-center">
+                                        <a href={url} target="_blank" rel="noopener noreferrer" className="font-bold pb-1 border-b-2 text-my-pink text-xl active:text-my-blue active:scale-95">Listen/Stream</a>
+                                    </div>
                                 );
                             }
 
@@ -110,7 +111,7 @@ const PostContent = ({ post, postHeading, postUrl }) => {
 
             <div className="my-10">
                 {(post.type === 'ep' || post.type === 'album') && (post.content.some(block => block.type === 'link' && block.linkType === 'download' && block.songTitle !== null)) && (
-                    <p className="mb-3 text-my-muted-text font-bold">Download/stream below.</p>
+                    <p className="mb-3 text-my-muted-text text-xl font-bold">Download/stream below;</p>
                 )}
 
                 {post.content.map((block, i) => {
@@ -122,7 +123,7 @@ const PostContent = ({ post, postHeading, postUrl }) => {
 
                             return (
                                 <div key={i} className="w-full mb-2">
-                                    <a href={url} target="_blank" className="font-extrabold text-my-pink text-lg underline active:text-my-blue active:scale-95">{songTitle}</a>
+                                    <a href={url} target="_blank" className="font-bold pb-1 border-b-2 text-my-pink text-xl active:text-my-blue active:scale-95">{songTitle}</a>
                                 </div>
                             );
 
@@ -134,7 +135,7 @@ const PostContent = ({ post, postHeading, postUrl }) => {
                                         Your browser does not support the audio element.
                                     </audio>
     
-                                    <a href={url} target="_blank" className="font-extrabold text-my-pink text-lg active:text-my-blue active:scale-95">Download</a>
+                                    <a href={url} target="_blank" className="font-extrabold text-my-pink pb-1 border-b-2 text-lg active:text-my-blue active:scale-95">Download</a>
                                 </div>
                             );
                         }
@@ -143,23 +144,27 @@ const PostContent = ({ post, postHeading, postUrl }) => {
             </div>
 
             <div className="my-10">
-                <p className="text-base font-bold mb-4">Share:</p>
+                <p className="text-base font-bold mb-2">Share:</p>
 
-                <div className="flex items-center gap-5 flex-wrap">
-                    <a href={`https://twitter.com/intent/tweet?url=${postUrl}&text=${postHeading}`} target="_blank" rel="noopener noreferrer">
-                        <img src="/icons/x.svg" alt="Share on Twitter" className="w-6 h-6" />
+                <div className="flex items-center gap-2 flex-wrap">
+                    <a href={`https://twitter.com/intent/tweet?url=${postUrl}&text=${postHeading}`} target="_blank" rel="noopener noreferrer" className="p-2.5 border rounded">
+                        <img src="/icons/x.svg" alt="Share on Twitter" className="w-4 h-4" />
                     </a>
-                    <a href={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`} target="_blank" rel="noopener noreferrer">
-                        <img src="/icons/facebook.svg" alt="Share on Facebook" className="w-6 h-6" />
+
+                    <a href={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`} target="_blank" rel="noopener noreferrer" className="p-2.5 border rounded">
+                        <img src="/icons/facebook.svg" alt="Share on Facebook" className="w-4 h-4" />
                     </a>
-                    <a href={`https://wa.me/?text=${postHeading}%20${postUrl}`} target="_blank" rel="noopener noreferrer">
-                        <img src="/icons/whatsapp.svg" alt="Share on WhatsApp" className="w-6 h-6" />
+
+                    <a href={`https://wa.me/?text=${postHeading}%20${postUrl}`} target="_blank" rel="noopener noreferrer" className="p-2.5 border rounded">
+                        <img src="/icons/whatsapp.svg" alt="Share on WhatsApp" className="w-4 h-4" />
                     </a>
-                    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${postUrl}`} target="_blank" rel="noopener noreferrer">
-                        <img src="/icons/linkedin.svg" alt="Share on LinkedIn" className="w-6 h-6" />
+
+                    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${postUrl}`} target="_blank" rel="noopener noreferrer" className="p-2.5 border rounded">
+                        <img src="/icons/linkedin.svg" alt="Share on LinkedIn" className="w-4 h-4" />
                     </a>
-                    <a href={`mailto:?subject=${postHeading}&body=${postUrl}`} target="_blank" rel="noopener noreferrer">
-                        <img src="/icons/mail.svg" alt="Share on WhatsApp" className="w-6 h-6" />
+
+                    <a href={`mailto:?subject=${postHeading}&body=${postUrl}`} target="_blank" rel="noopener noreferrer" className="p-2.5 border rounded">
+                        <img src="/icons/mail.svg" alt="Share on WhatsApp" className="w-4 h-4" />
                     </a>
                 </div>
             </div>

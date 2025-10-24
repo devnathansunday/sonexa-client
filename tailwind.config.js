@@ -26,6 +26,7 @@ module.exports = {
       },
       fontFamily: {
         clash: ['var(--font-clash-display)'],
+        lora: ['var(--font-lora)'],
       }
     },
   },

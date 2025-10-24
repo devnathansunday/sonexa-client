@@ -18,7 +18,7 @@ const Popular = ({ popularPosts }) => {
 
     return (
         <section className="mx-auto max-w-[1280px]">
-            <div className="m-3 p-3 bg-my-dark">
+            <div className="m-3 p-6 bg-my-dark">
                 <h2 className="capitalize font-bold text-xl mb-3 rounded">Popular</h2>
 
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -28,7 +28,7 @@ const Popular = ({ popularPosts }) => {
                                 trackPostViews(post.id);
                                 startLoading();
                             }}>
-                                <figure className="flex-1 w-full max-w-[180px] h-[120px] object-cover overflow-hidden rounded-lg">
+                                <figure className="flex-1 w-full max-w-[180px] h-[125px] object-cover overflow-hidden rounded-lg">
                                     <Image
                                         src={post.featuredImage.url}
                                         alt=""
@@ -39,10 +39,10 @@ const Popular = ({ popularPosts }) => {
                                     />
                                 </figure>
 
-                                <div className="flex-1 space-y-1 my-1">
+                                <div className="flex-1 space-y-1 my-0.5 min-w-0">
                                     <p className="text-xs text-my-text capitalize border border-my-muted-text px-3 py-1 w-fit rounded">{post.type}</p>
                                     
-                                    <h2 className="text-sm font-medium line-clamp-2 group-active:text-my-pink">{post.heading}</h2>
+                                    <h2 className="text-base font-lora font-medium line-clamp-2 group-active:text-my-pink">{post.heading}</h2>
 
                                     <div className="text-sm text-my-muted-text line-clamp-2">
                                         {post.content.map((c, index) =>

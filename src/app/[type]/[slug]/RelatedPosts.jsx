@@ -52,20 +52,19 @@ export default function RelatedPosts({ postId }) {
                             trackPostViews(post.id);
                             startLoading();
                         }}>
-                            <p className={`px-3 py-1 bg-my-pink shadow-lg rounded-full absolute top-1.5 left-1.5 text-xs ${post.type === 'ep' ? 'uppercase' : 'capitalize'}`}>{post.type}</p>
-                            <figure className="flex-1 w-full max-w-[140px] h-[100px] lg:h-[100px] object-cover overflow-hidden rounded-xl">
+                            <figure className="w-[120px] max-w-[140px] h-[100px] lg:h-[100px] object-cover overflow-hidden rounded-xl">
                                 <Image
                                     src={post.featuredImage?.url}
                                     alt=""
-                                    width={400}
+                                    width={300}
                                     height={300}
                                     className="object-cover"
                                     style={{ width: '100%', height: "100%" }}
                                 />
                             </figure>
 
-                            <div className="flex-1 my-1">
-                                <h2 className="text-base font-medium line-clamp-2 md:line-clamp-2 group-active:text-my-pink">{post.heading}</h2>
+                            <div className="flex-1 min-w-0 my-1">
+                                <h2 className="text-base font-medium font-lora line-clamp-2 md:line-clamp-2 group-active:text-my-pink">{post.heading}</h2>
 
                                 <div className="text-sm text-my-muted-text line-clamp-2 md:line-clamp-2">
                                     {post.content?.map((c, index) =>

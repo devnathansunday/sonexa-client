@@ -54,9 +54,9 @@ const LoadMorePosts = ({ initialPosts, type }) => {
                                         year: 'numeric'
                                     })}</p>
 
-                                    <h2 className="text-sm font-medium line-clamp-2 group-active:text-my-pink">{post.heading}</h2>
+                                    <h2 className="text-lg font-medium font-lora line-clamp-2 group-active:text-my-pink">{post.heading}</h2>
 
-                                    <div className="text-sm text-my-muted-text line-clamp-3">
+                                    <div className="text-sm text-my-muted-text line-clamp-2">
                                         {post.content.map((c, index) =>
                                             c.type === 'text' ? <p key={index}>{c.content}</p> : null
                                         )}

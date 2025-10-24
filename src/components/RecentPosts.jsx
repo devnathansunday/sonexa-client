@@ -22,13 +22,13 @@ const RecentPosts = ({ songs, news, videos }) => {
     return (
         <div>
             <section ref={postsSectionRef} className="py-2 scroll-mt-[65px]">
-                <h3 className="font-bold text-xl mb-2">Categorized</h3>
+                <h3 className="font-bold text-xl mb-2">Explore</h3>
 
                 <nav className="p-3 mb-2 block bg-my-dark sticky top-16 z-[99]">
                     <div className="category-nav flex items-center gap-5 text-xs tracking-widest">
-                        <button className={`relative pb-1 transform scale-95 text-my-muted-text after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-my-yellow after:rounded-full after:h-[1.5px] after:w-0 after:transition-all after:duration-200 after:ease-out transition-all duration-300 ease-out overflow-hidden ${active === 0 ? 'after:w-3/4 text-my-text scale-100' : ''}`} onClick={() => {setActive(0), scrollToTopOfPosts()}}>Music</button>
-                        <button className={`relative pb-1 transform scale-95 text-my-muted-text after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-my-yellow after:rounded-full after:h-[1.5px] after:w-0 after:transition-all after:duration-200 after:ease-out transition-all duration-300 ease-out overflow-hidden ${active === 1 ? 'after:w-3/4 text-my-text scale-100' : ''}`} onClick={() => {setActive(1), scrollToTopOfPosts()}}>News</button>
-                        <button className={`relative pb-1 transform scale-95 text-my-muted-text after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-my-yellow after:rounded-full after:h-[1.5px] after:w-0 after:transition-all after:duration-200 after:ease-out transition-all duration-300 ease-out overflow-hidden ${active === 2 ? 'after:w-3/4 text-my-text scale-100' : ''}`} onClick={() => {setActive(2), scrollToTopOfPosts()}}>Videos</button>
+                        <button className={`relative pb-1 transform scale-95 text-my-muted-text after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-my-text after:rounded-full after:h-[1.5px] after:w-0 after:transition-all after:duration-200 after:ease-out transition-all duration-300 ease-out overflow-hidden cursor-pointer ${active === 0 ? 'after:w-3/5 text-my-text scale-100' : ''}`} onClick={() => {setActive(0), scrollToTopOfPosts()}}>Music</button>
+                        <button className={`relative pb-1 transform scale-95 text-my-muted-text after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-my-text after:rounded-full after:h-[1.5px] after:w-0 after:transition-all after:duration-200 after:ease-out transition-all duration-300 ease-out overflow-hidden cursor-pointer ${active === 1 ? 'after:w-3/5 text-my-text scale-100' : ''}`} onClick={() => {setActive(1), scrollToTopOfPosts()}}>News</button>
+                        <button className={`relative pb-1 transform scale-95 text-my-muted-text after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-my-text after:rounded-full after:h-[1.5px] after:w-0 after:transition-all after:duration-200 after:ease-out transition-all duration-300 ease-out overflow-hidden cursor-pointer ${active === 2 ? 'after:w-3/5 text-my-text scale-100' : ''}`} onClick={() => {setActive(2), scrollToTopOfPosts()}}>Videos</button>
                     </div>
                 </nav>
                 

@@ -94,6 +94,7 @@ const Featured = ({ posts }) => {
             <div className="absolute top-3 left-3 z-30 flex items-center bg-my-text p-2 rounded-full">
                 <img src="/svgs/fire.svg" alt="" />
             </div>
+
             {slides.length > 0 ? (
                 <div
                     {...swipeHandlers}
@@ -115,20 +116,20 @@ const Featured = ({ posts }) => {
                                 trackPostViews(slide.id);
                                 startLoading();
                             }}>
-                                <figure className="w-full rounded-xl overflow-hidden">
+                                <figure className="w-full overflow-hidden">
                                     <Image
                                         src={slide.featuredImage.url || null}
                                         alt=""
                                         width={600}
                                         height={300}
-                                        className="object-cover w-full h-[450px] md:h-[350px]"
+                                        className="object-cover w-full h-[350px] md:h-[350px]"
                                     />
                                 </figure>
                                 
-                                <div className="absolute top-0 bottom-0 right-0 left-0 px-5 py-16 bg-gradient-to-b from-transparent to-black flex justify-end flex-col gap-1">
-                                    <p className={`text-xs font-medium text-my-yellow capitalize pb-2 pe-2 border-b border-r w-fit rounded-br ${slide.type === 'ep' ? 'uppercase' : ''}`}>{slide.type}</p>
+                                <div className="px-4 py-6 pb-14 h-[150px] bg-black/40">
+                                    <p className={`text-xs text-my-yellow font-extrabold uppercase rounded-br ${slide.type === 'ep' ? 'uppercase' : ''}`}>{slide.type}</p>
                                     
-                                    <h3 className="font-bold text-xl line-clamp-2 group-active:text-my-pink">{slide.heading}</h3>
+                                    <h3 className="font-semibold text-my-text text-xl font-lora line-clamp-2 group-active:text-my-pink">{slide.heading}</h3>
                                 </div>
                             </div>
                         </Link>

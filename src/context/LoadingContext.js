@@ -15,7 +15,7 @@ export function LoadingProvider({ children }) {
     <LoadingContext.Provider value={{ isLoading, startLoading, stopLoading }}>
       {children}
       {isLoading && (
-        <div className="loader fixed bottom-4 left-4 z-[50000]"></div>
+        <div className="loader fixed top-20 left-4 z-[50000]"></div>
       )}
     </LoadingContext.Provider>
   );

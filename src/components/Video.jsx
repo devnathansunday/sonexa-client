@@ -38,7 +38,7 @@ const Video = ({ posts }) => {
         
                             <div className="content py-3 flex flex-col gap-1 backdrop-blur-xs">
                                 <p className={`px-3 py-1 border w-fit rounded text-xs ${post.type === 'ep' ? 'uppercase' : 'capitalize'}`}>{post.type === 'song' ? 'single' : post.type}</p>
-                                <h3 className="font-medium line-clamp-2 text-sm group-active:text-my-pink">{post.heading}</h3>
+                                <h3 className="font-medium font-lora line-clamp-2 text-sm group-active:text-my-pink">{post.heading}</h3>
         
                                 <div className="flex items-center justify-between">
                                     <p className="text-xs text-my-muted-text">{new Date(post.createdAt).toLocaleString('en-GB', {

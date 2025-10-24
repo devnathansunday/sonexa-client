@@ -8,18 +8,22 @@ const Extras = () => {
     return (
         <section className="my-2">
             <div className="newsletter my-3 p-6 bg-black/25 rounded-xl">
-                <h4 className="font-bold text-sm">NEWSLETTER</h4>
-                <p className="text-sm text-my-text mb-4 font-light">Get weekly entertainment drops.</p>
+                <h4 className="font-bold text-base mb-2">NEWSLETTER</h4>
+                <hr className="flex-1 h-[2px] bg-my-content border-none outline-none" />
+
+                <p className="text-3xl text-my-text font-lora my-6 font-medium">Get weekly entertainment drops.</p>
 
                 <form className="hero">
-                    <input type="email" placeholder="Email here..." className="w-full h-full mb-2 p-4 text-sm outline-none border-[0.5] border-my-content" />
-                    <button className="w-full bg-my-yellow py-3 text-black rounded">Subscribe</button>
+                    <input type="email" placeholder="Email here..." className="w-full h-full mb-3 p-4 text-base outline-none border-[0.5] border-[#777] rounded" />
+                    <button className="w-full bg-my-yellow py-3.5 text-black rounded cursor-pointer">Subscribe</button>
                 </form>
             </div>
 
             <div className="socials my-2 p-6 bg-black/25 rounded-xl">
-                <h4 className="font-bold text-sm">FOLLOW US</h4>
-                <p className="text-sm text-my-text mb-4 font-light">Stay connected on social media.</p>
+                <h4 className="font-bold text-base mb-2 ">FOLLOW US</h4>
+                <hr className="flex-1 h-[2px] bg-my-content border-none outline-none" />
+
+                <p className="text-3xl font-lora text-my-text my-6 font-medium">Stay connected on social media.</p>
                 
                 <div className="flex items-center gap-2 my-2">
                     <a href="https://www.facebook.com/profile.php?id=61582635120782" target="_blank">

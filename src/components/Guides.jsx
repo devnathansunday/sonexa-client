@@ -17,17 +17,17 @@ const Guides = ({ guides }) => {
     const { startLoading } = useLoading();
 
     return (
-        <section className="my-3 p-4 bg-black/25 rounded-xl">
+        <section className="p-4 bg-black/25 rounded-xl">
             <div className="w-full flex items-center justify-between mb-2">
-                <h3 className="capitalize font-bold text-sm">GUIDES</h3>
+                <h3 className="capitalize font-bold text-base">GUIDES</h3>
                 <Link href={`/guide`} className="ms-auto">
-                    <button className="text-xs text-my-muted-text cursor-pointer active:text-my-pink">
-                        {`more >>`}
+                    <button onClick={() => startLoading()} className="text-xs border py-1 px-3 rounded-full text-my-text cursor-pointer active:scale-[98%]">
+                        more
                     </button>
                 </Link>
             </div>
 
-            <hr className="w-full h-[1px] bg-my-content border-none mb-3" />
+            <hr className="w-full h-[2px] bg-my-content border-none mb-3" />
             
             <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3 lg:grid-cols-1">
                 {guides?.posts?.length > 0 ? guides.posts.map(guide => (
@@ -48,7 +48,7 @@ const Guides = ({ guides }) => {
                             </figure>
 
                             <div className="flex-1 my-1">
-                                <h2 className="text-base font-medium line-clamp-2 md:line-clamp-2 group-active:text-my-pink">{guide.heading}</h2>
+                                <h2 className="text-base font-medium font-lora line-clamp-2 md:line-clamp-2 group-active:text-my-pink">{guide.heading}</h2>
 
                                 <div className="text-sm text-my-muted-text line-clamp-2 md:line-clamp-2">
                                     {guide.content.map((c, index) =>
