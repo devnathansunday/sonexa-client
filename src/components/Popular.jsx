@@ -17,14 +17,14 @@ const Popular = ({ popularPosts }) => {
     const { startLoading } = useLoading();
 
     return (
-        <section className="mx-auto max-w-[1280px]">
+        <section className="mx-auto max-w-[1200px]">
             <div className="m-3 p-6 bg-my-dark">
                 <h2 className="capitalize font-bold text-xl mb-3 rounded">Popular</h2>
 
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {popularPosts.length > 0 && popularPosts.map(post => (
                         <Link href={`/${post.type}/${post.slug}`} key={post.id} className="flex-1 transform transition-all ease-out duration-100 active:scale-[98%] group">
-                            <div className="flex gap-3" onClick={() => {
+                            <div className="flex gap-3 hover:scale-[98%] transition-transform duration-300" onClick={() => {
                                 trackPostViews(post.id);
                                 startLoading();
                             }}>

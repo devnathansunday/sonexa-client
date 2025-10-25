@@ -6,8 +6,8 @@ const Footer = () => {
     const { startLoading } = useLoading();
 
     return (
-        <section className="my-3 p-3 bg-black/25">
-            <div className="mx-auto max-w-[1280px]">
+        <section className="my-6 p-4 bg-black/25">
+            <div className="mx-auto max-w-[1200px]">
                 <div className="mx-3">
                     <div className="my-10">
                         <h2 className="text-2xl font-bold">Sonexa</h2>

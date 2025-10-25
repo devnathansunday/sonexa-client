@@ -35,7 +35,7 @@ const Latest = ({ sortedPosts }) => {
                     {recentPosts?.map(post => (
                         <article key={post.id} className="snap-center w-[80%] shrink-0 xs:w-[60%] sm:w-[45%] md:w-[35%] lg:w-[40%] xl:w-[35%] transform transition-all ease-out duration-100 active:scale-[98%] group">
                             <Link href={`/${post.type}/${post.slug}`} key={post.slug} className="w-full">
-                                <div className="relative flex flex-col gap-2" onClick={() => {
+                                <div className="relative flex flex-col gap-2 hover:scale-[98%] transition-transform duration-300" onClick={() => {
                                     trackPostViews(post.id);
                                     startLoading();
                                 }}>

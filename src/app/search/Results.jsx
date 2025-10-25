@@ -53,7 +53,7 @@ const Results = () => {
     };
 
     return (
-        <section className="lg:w-[70%]">
+        <section className="lg:w-[75%]">
             <h2 className="font-medium my-3 italic">Search results for <span className="text-my-blue">"{query}"</span></h2>
 
             <div className="space-y-3">
@@ -62,7 +62,7 @@ const Results = () => {
                 ) : results.length > 0 ? results.map(post => (
                         <div key={post.slug} className="transform transition-all ease-out duration-100 active:scale-[98%] group">
                             <Link href={`/${post.type}/${post.slug}`} className="w-full">
-                                <div className="flex gap-3" onClick={() => {
+                                <div className="flex gap-3 hover:scale-[98%] transition-transform duration-300" onClick={() => {
                                     trackPostViews(post.id);
                                     startLoading();
                                 }}>

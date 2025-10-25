@@ -19,15 +19,13 @@ const Guides = ({ guides }) => {
     return (
         <section className="p-4 bg-black/25 rounded-xl">
             <div className="w-full flex items-center justify-between mb-2">
-                <h3 className="capitalize font-bold text-base">GUIDES</h3>
+                <h2 className="capitalize font-bold text-xl rounded">Guides</h2>
                 <Link href={`/guide`} className="ms-auto">
-                    <button onClick={() => startLoading()} className="text-xs border py-1 px-3 rounded-full text-my-text cursor-pointer active:scale-[98%]">
+                    <button onClick={() => startLoading()} className="text-xs rounded-full py-1 px-3 border text-my-text cursor-pointer active:scale-95">
                         more
                     </button>
                 </Link>
             </div>
-
-            <hr className="w-full h-[2px] bg-my-content border-none mb-3" />
             
             <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3 lg:grid-cols-1">
                 {guides?.posts?.length > 0 ? guides.posts.map(guide => (

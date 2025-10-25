@@ -48,7 +48,7 @@ export default function RelatedPosts({ postId }) {
                 
                 : related.length > 0 ? related?.map(post => (
                     <Link href={`/guides/${post.slug}`} key={post.slug} className="transform transition-all ease-out duration-100 active:scale-[98%] group">
-                        <div className="flex gap-3 relative" onClick={() => {
+                        <div className="flex gap-3 relative hover:scale-[98%] transition-transform duration-300" onClick={() => {
                             trackPostViews(post.id);
                             startLoading();
                         }}>

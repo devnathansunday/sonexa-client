@@ -147,24 +147,24 @@ const PostContent = ({ post, postHeading, postUrl }) => {
                 <p className="text-base font-bold mb-2">Share:</p>
 
                 <div className="flex items-center gap-2 flex-wrap">
-                    <a href={`https://twitter.com/intent/tweet?url=${postUrl}&text=${postHeading}`} target="_blank" rel="noopener noreferrer" className="p-2.5 border rounded">
-                        <img src="/icons/x.svg" alt="Share on Twitter" className="w-4 h-4" />
+                    <a href={`https://twitter.com/intent/tweet?url=${postUrl}&text=${postHeading}`} target="_blank" rel="noopener noreferrer" className="p-2 border rounded group">
+                        <img src="/icons/x.svg" alt="Share on Twitter" className="w-5 h-5 group-hover:scale-105 hover:-rotate-6 transition-transform duration-200" />
                     </a>
 
-                    <a href={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`} target="_blank" rel="noopener noreferrer" className="p-2.5 border rounded">
-                        <img src="/icons/facebook.svg" alt="Share on Facebook" className="w-4 h-4" />
+                    <a href={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`} target="_blank" rel="noopener noreferrer" className="p-2 border rounded group">
+                        <img src="/icons/facebook.svg" alt="Share on Facebook" className="w-5 h-5 group-hover:scale-105 hover:-rotate-6 transition-transform duration-200" />
                     </a>
 
-                    <a href={`https://wa.me/?text=${postHeading}%20${postUrl}`} target="_blank" rel="noopener noreferrer" className="p-2.5 border rounded">
-                        <img src="/icons/whatsapp.svg" alt="Share on WhatsApp" className="w-4 h-4" />
+                    <a href={`https://wa.me/?text=${postHeading}%20${postUrl}`} target="_blank" rel="noopener noreferrer" className="p-2 border rounded group">
+                        <img src="/icons/whatsapp.svg" alt="Share on WhatsApp" className="w-5 h-5 group-hover:scale-105 hover:-rotate-6 transition-transform duration-200" />
                     </a>
 
-                    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${postUrl}`} target="_blank" rel="noopener noreferrer" className="p-2.5 border rounded">
-                        <img src="/icons/linkedin.svg" alt="Share on LinkedIn" className="w-4 h-4" />
+                    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${postUrl}`} target="_blank" rel="noopener noreferrer" className="p-2 border rounded group">
+                        <img src="/icons/linkedin.svg" alt="Share on LinkedIn" className="w-5 h-5 group-hover:scale-105 hover:-rotate-6 transition-transform duration-200" />
                     </a>
 
-                    <a href={`mailto:?subject=${postHeading}&body=${postUrl}`} target="_blank" rel="noopener noreferrer" className="p-2.5 border rounded">
-                        <img src="/icons/mail.svg" alt="Share on WhatsApp" className="w-4 h-4" />
+                    <a href={`mailto:?subject=${postHeading}&body=${postUrl}`} target="_blank" rel="noopener noreferrer" className="p-2 border rounded group">
+                        <img src="/icons/mail.svg" alt="Share on WhatsApp" className="w-5 h-5 group-hover:scale-105 hover:-rotate-6 transition-transform duration-200" />
                     </a>
                 </div>
             </div>

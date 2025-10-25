@@ -23,7 +23,9 @@ const News = ({ posts }) => {
                         <div onClick={() => {
                             trackPostViews(post.id);
                             startLoading();
-                        }}>
+                        }}
+                        className="hover:scale-[98%] transition-transform duration-300"
+                        >
                             <figure className="w-full rounded overflow-hidden">
                                 <Image
                                     src={post.featuredImage.url || null}

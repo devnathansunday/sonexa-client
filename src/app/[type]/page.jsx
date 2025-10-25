@@ -13,7 +13,7 @@ const Posts = async({ params }) => {
     const makePlural = type === 'news' ? '' : 's';
 
     return (
-        <section className="w-full lg:w-[70%]">
+        <section className="w-full lg:w-[75%]">
             <h2 className="capitalize font-bold mb-3">{type + makePlural}</h2>
             <LoadMorePosts initialPosts={initialPosts} type={type} />
         </section>

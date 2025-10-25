@@ -1,34 +1,34 @@
-'use client';
-import { useEffect } from 'react';
-import { useLoading } from '@/context/LoadingContext';
+"use client";
+import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useLoading } from "@/context/LoadingContext";
 
 export default function NavigationHandler() {
-  const { stopLoading } = useLoading();
+  const [trigger, setTrigger] = useState(false);
+  const prevPathRef = useRef(null);
+
+  const { almostDone, stopLoading, isLoading } = useLoading();
+  const pathName = usePathname();
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      stopLoading();
-    }, 1000);
+    if (isLoading && prevPathRef.current === pathName) {
+      setTrigger(true);
+      console.log("triggered!");
+    }
+  }, [isLoading])
 
-    const handleLoad = () => {
-      clearTimeout(timeout);
-      stopLoading();
-    };
-
-    const handleDOMReady = () => {
-      clearTimeout(timeout);
-      stopLoading();
-    };
-
-    window.addEventListener('load', handleLoad);
-    document.addEventListener('DOMContentLoaded', handleDOMReady);
+  useEffect(() => {
+    almostDone();
     
-    return () => {
-      clearTimeout(timeout);
-      window.removeEventListener('load', handleLoad);
-      document.removeEventListener('DOMContentLoaded', handleDOMReady);
-    };
-  }, [stopLoading]);
+    if (prevPathRef.current !== null && prevPathRef.current !== pathName && !trigger) {
+      stopLoading();
+    } else if (trigger) {
+      stopLoading();
+      setTrigger(false);
+    }
+    
+    prevPathRef.current = pathName;
+  }, [pathName, trigger]);
 
   return null;
 }

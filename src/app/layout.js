@@ -5,13 +5,11 @@ import localFont from 'next/font/local';
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Popular from "@/components/Popular";
-import PageLoader from "@/components/helper/PageLoader";
 import Extras from "@/components/Extras";
-import Guides from "@/components/Guides";
 import { TrackViewProvider } from "@/context/TrackViewContext";
 import { LoadingProvider } from '@/context/LoadingContext';
 import NavigationHandler from "@/components/NavigationHandler";
-import { getPopularPosts, fetchPosts } from "@/lib/api/posts";
+import { getPopularPosts } from "@/lib/api/posts";
 
 const clashDisplay = localFont({
   src: [
@@ -31,7 +29,7 @@ const clashDisplay = localFont({
     { path: './fonts/CreatoDisplay-ThinItalic.woff2', weight: '100', style: 'italic' },
   ],
   variable: '--font-clash-display',
-  display: 'swap' 
+  display: 'swap'
 })
 
 const lora = localFont({
@@ -63,10 +61,7 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
-  const [ guides, popularPosts] = await Promise.all([
-    fetchPosts(0, 6, 'guide'),
-    getPopularPosts()
-  ]);
+  const popularPosts = await getPopularPosts();
 
   return (
     <html lang="en" className={`scroll-smooth font-clash text-base ${clashDisplay.className} ${clashDisplay.variable} ${lora.className} ${lora.variable}`}>
@@ -75,14 +70,12 @@ export default async function RootLayout({ children }) {
           <header className="text-my-text sticky top-0 left-0 right-0 z-[999]">
             <Nav />
           </header>
-          <PageLoader />
 
           <TrackViewProvider>
-            <section className="w-full h-full mx-auto p-3 gap-x-4 flex flex-col lg:flex-row max-w-[1280px]">
+            <section className="w-full h-full mx-auto p-3 gap-4 flex flex-col lg:flex-row lg:items-start max-w-[1200px]">
               {children}
               
-              <aside className="flex-1 lg:w-[30%]">
-                <Guides guides={guides} />
+              <aside className="w-full lg:w-[25%] self-start sticky top-20 lg:max-h-[calc(100vh-80px)] lg:overflow-y-auto scrollbar-hide">
                 <Extras />
               </aside>
             </section>
