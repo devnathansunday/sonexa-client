@@ -11,7 +11,7 @@ export default async function Home() {
     fetchPosts(0, 8, "song"),
     fetchPosts(0, 8, "news"),
     fetchPosts(0, 8, "video"),
-    fetchPosts(0, 3, "guides"),
+    fetchPosts(0, 3, "guide"),
   ]);
 
   return (

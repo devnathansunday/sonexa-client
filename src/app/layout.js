@@ -58,6 +58,27 @@ export const metadata = {
       },
     ],
   },
+  openGraph: {
+    title: 'Sonexa - Music & Entertainment Blog',
+    description: 'Stay updated with the latest news, music releases, videos, and how-to guides from the world of music and entertainment.',
+    url: 'https://sonexa-client.vercel.app',
+    siteName: 'Sonexa',
+    images: [
+      {
+        url: '/sonexa-og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Sonexa Blog',
+      }
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sonexa - Music & Entertainment Blog',
+    description: 'Stay updated with the latest news, music releases, videos, and how-to guides.',
+    images: ['/sonexa-og-image.png'],
+  },
 }
 
 export default async function RootLayout({ children }) {
@@ -75,7 +96,7 @@ export default async function RootLayout({ children }) {
             <section className="w-full h-full mx-auto p-3 gap-4 flex flex-col lg:flex-row lg:items-start max-w-[1200px]">
               {children}
               
-              <aside className="w-full lg:w-[25%] self-start sticky top-20 lg:max-h-[calc(100vh-80px)] lg:overflow-y-auto scrollbar-hide">
+              <aside className="w-full lg:w-[25%]">
                 <Extras />
               </aside>
             </section>

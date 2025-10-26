@@ -15,7 +15,6 @@ const LoadMorePosts = ({ initialPosts, type }) => {
     const [posts, setPosts] = useState(initialPosts.posts);
     
     const handleLoadMore = async () => {
-        // console.log('loading more posts...')
         setLoading(true);
 
         const nextOffset = posts.length;

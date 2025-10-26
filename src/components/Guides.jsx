@@ -27,7 +27,7 @@ const Guides = ({ guides }) => {
                 </Link>
             </div>
             
-            <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3 lg:grid-cols-1">
+            <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
                 {guides?.posts?.length > 0 ? guides.posts.map(guide => (
                     <Link href={`/guides/${guide.slug}`} key={guide.slug} className="transform transition-all ease-out duration-100 active:scale-[98%] group">
                         <div className="flex gap-3" onClick={() => {
@@ -45,10 +45,10 @@ const Guides = ({ guides }) => {
                                 />
                             </figure>
 
-                            <div className="flex-1 my-1">
-                                <h2 className="text-base font-medium font-lora line-clamp-2 md:line-clamp-2 group-active:text-my-pink">{guide.heading}</h2>
+                            <div className="flex-1">
+                                <h2 className="text-base font-medium mb-1 font-lora line-clamp-2 md:line-clamp-2 group-active:text-my-pink">{guide.heading}</h2>
 
-                                <div className="text-sm text-my-muted-text line-clamp-2 md:line-clamp-2">
+                                <div className="text-base text-my-muted-text line-clamp-2 md:line-clamp-2">
                                     {guide.content.map((c, index) =>
                                         c.type === 'text' ? <p key={index}>{c.content}</p> : null
                                     )}

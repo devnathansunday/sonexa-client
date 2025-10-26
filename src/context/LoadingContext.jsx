@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 const LoadingContext = createContext();
 
 export const useLoading = () => useContext(LoadingContext);
@@ -22,11 +22,15 @@ export function LoadingProvider({ children }) {
   const stopLoading = useCallback(() => {
     setIsLoading(false);
     setWidth('100%');
-
-    setTimeout(() => {
-      setVisible(false);
-    }, 2000);
   }, []);
+  
+  useEffect(() => {
+    if (width === '100%') {
+      setTimeout(() => {
+        setVisible(false);
+      }, 2000);
+    }
+  }, [width]);
 
   return (
     <LoadingContext.Provider value={{ isLoading, startLoading, almostDone, stopLoading }}>

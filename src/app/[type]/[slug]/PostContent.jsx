@@ -9,6 +9,117 @@ const PostContent = ({ post, postHeading, postUrl }) => {
         }
     }, [post]);
 
+    const formatText = (text) => {
+        const lines = text.split('\n');
+        const elements = [];
+        let currentList = [];
+        let listType = null;
+        
+        lines.forEach((line, lineIndex) => {
+            if (line.startsWith('## ')) {
+                if (currentList.length > 0) {
+                    elements.push(createList(currentList, listType, lineIndex));
+                    currentList = [];
+                    listType = null;
+                }
+                elements.push(<h2 key={lineIndex} className="text-2xl font-bold mb-2">{line.slice(3)}</h2>);
+                return;
+            }
+            
+            if (line.startsWith('### ')) {
+                if (currentList.length > 0) {
+                    elements.push(createList(currentList, listType, lineIndex));
+                    currentList = [];
+                    listType = null;
+                }
+                elements.push(<h3 key={lineIndex} className="text-xl font-bold mb-2">{line.slice(4)}</h3>);
+                return;
+            }
+            
+            const unorderedMatch = line.match(/^[\-\*]\s+(.+)$/);
+            if (unorderedMatch) {
+                if (listType !== 'ul' && currentList.length > 0) {
+                    elements.push(createList(currentList, listType, lineIndex));
+                    currentList = [];
+                }
+                listType = 'ul';
+                currentList.push({ index: lineIndex, content: unorderedMatch[1] });
+                return;
+            }
+            
+            const orderedMatch = line.match(/^\d+\.\s+(.+)$/);
+            if (orderedMatch) {
+                if (listType !== 'ol' && currentList.length > 0) {
+                    elements.push(createList(currentList, listType, lineIndex));
+                    currentList = [];
+                }
+                listType = 'ol';
+                currentList.push({ index: lineIndex, content: orderedMatch[1] });
+                return;
+            }
+            
+            if (currentList.length > 0) {
+                elements.push(createList(currentList, listType, lineIndex));
+                currentList = [];
+                listType = null;
+            }
+            
+            if (line.trim()) {
+                const formatted = parseInlineFormatting(line);
+                elements.push(<p key={lineIndex} className="mb-6">{formatted}</p>);
+            }
+        });
+        
+        if (currentList.length > 0) {
+            elements.push(createList(currentList, listType, lines.length));
+        }
+        
+        return elements;
+    };
+
+    const createList = (items, type, keyBase) => {
+        const ListTag = type === 'ul' ? 'ul' : 'ol';
+        const listClass = type === 'ul' ? 'list-disc ml-8 mb-6' : 'list-decimal ml-8 mb-6';
+        
+        return (
+            <ListTag key={`list-${keyBase}`} className={listClass}>
+                {items.map((item) => (
+                    <li key={item.index} className="mb-1">
+                        {parseInlineFormatting(item.content)}
+                    </li>
+                ))}
+            </ListTag>
+        );
+    };
+
+    const parseInlineFormatting = (text) => {
+        const parts = [];
+        let lastIndex = 0;
+        
+        const regex = /(\*\*(.+?)\*\*)|(\*(.+?)\*)/g;
+        let match;
+        
+        while ((match = regex.exec(text)) !== null) {
+            if (match.index > lastIndex) {
+                parts.push(text.slice(lastIndex, match.index));
+            }
+            
+            if (match[1]) {
+                parts.push(<strong key={match.index}>{match[2]}</strong>);
+            } else if (match[3]) {
+                parts.push(<em key={match.index}>{match[4]}</em>);
+            }
+            
+            lastIndex = regex.lastIndex;
+        }
+        
+        if (lastIndex < text.length) {
+            parts.push(text.slice(lastIndex));
+        }
+        
+        return parts.length > 0 ? parts : text;
+    };
+
     return (
         <section className="space-y-2 mb-16">
             <h2 className="font-semibold font-lora text-4xl">{post.heading}</h2>
@@ -25,7 +136,7 @@ const PostContent = ({ post, postHeading, postUrl }) => {
             <div className="space-y-6">
                 {post.content.length > 0 && 
                     post.content.map((block, i) => {
-                        if (block.type === 'text') return <p key={i}>{block.content}</p>;
+                        if (block.type === 'text') return formatText(block.content);
 
                         if (block.type === 'quote') return <blockquote key={i} className="italic border-l-2 border-[#777] p-3 bg-my-content rounded-e-lg my-3 text-my-text">{block.content}</blockquote>;
 

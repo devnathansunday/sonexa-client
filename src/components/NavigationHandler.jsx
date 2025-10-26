@@ -13,7 +13,6 @@ export default function NavigationHandler() {
   useEffect(() => {
     if (isLoading && prevPathRef.current === pathName) {
       setTrigger(true);
-      console.log("triggered!");
     }
   }, [isLoading])
 
