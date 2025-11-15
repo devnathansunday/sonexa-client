@@ -14,6 +14,8 @@ const nextConfig = {
   },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    CRON_SECRET: process.env.CRON_SECRET,
+    NEXT_EXPRESS_API_URL: process.env.EXPRESS_API_URL
   }
 };
 

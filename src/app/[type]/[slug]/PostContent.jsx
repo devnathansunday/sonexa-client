@@ -7,12 +7,14 @@ const PostContent = ({ post, postHeading, postUrl }) => {
     const { stopLoading } = useLoading();
 
     useEffect(() => {
-        requestAnimationFrame(() => {
+        if (post) {
             requestAnimationFrame(() => {
-                stopLoading();
-            })
-        });
-    }, []);
+                requestAnimationFrame(() => {
+                    stopLoading();
+                })
+            });
+        }
+    }, [post]);
 
     useEffect(() => {
         if (window.instgrm) {

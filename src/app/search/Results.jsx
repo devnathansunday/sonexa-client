@@ -13,12 +13,22 @@ const Results = () => {
     const query = searchParams.get("query");
     
     const { trackPostViews } = useTrackView();
-    const { startLoading } = useLoading();
+    const { startLoading, stopLoading } = useLoading();
     
     const [results, setResults] = useState([]);
     const [loadingMore, setLoadingMore] = useState(false);
     const [loading, setLoading] = useState(true);
     const [hasMore, sethasMore] = useState(false);
+
+    useEffect(() => {
+        if (results) {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    stopLoading();
+                })
+            });
+        }
+    }, [results]);
 
     useEffect(() => {
         const fetchResults = async() => {

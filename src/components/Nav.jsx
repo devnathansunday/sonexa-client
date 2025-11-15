@@ -64,7 +64,7 @@ const Nav = () => {
                     </a>
                     
                     {/* desktop nav */}
-                    <div className="hidden h-full lg:flex md:items-center gap-8 font-bold text-base text-[#d7d7d7]">
+                    <div className="hidden h-full lg:flex md:items-center gap-10 font-bold text-base text-[#d7d7d7]">
                         <Link href="/">
                             <button onClick={() => startLoading()} className="w-fit uppercase hover:text-my-pink active:text-my-pink cursor-pointer">
                                 Home

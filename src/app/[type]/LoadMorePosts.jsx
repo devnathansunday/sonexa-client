@@ -15,12 +15,14 @@ const LoadMorePosts = ({ initialPosts, type }) => {
     const [posts, setPosts] = useState(initialPosts.posts);
 
     useEffect(() => {
-        requestAnimationFrame(() => {
+        if (posts) {
             requestAnimationFrame(() => {
-                stopLoading();
-            })
-        });
-    }, []);
+                requestAnimationFrame(() => {
+                    stopLoading();
+                })
+            });
+        }
+    }, [posts]);
     
     const handleLoadMore = async () => {
         setLoading(true);
