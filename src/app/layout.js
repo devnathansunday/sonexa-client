@@ -9,6 +9,7 @@ import Extras from "@/components/Extras";
 import { TrackViewProvider } from "@/context/TrackViewContext";
 import { LoadingProvider } from '@/context/LoadingContext';
 import NavigationHandler from "@/components/NavigationHandler";
+import HomeLoadHandler from "@/components/HomeLoadHandler";
 import { getPopularPosts } from "@/lib/api/posts";
 
 const clashDisplay = localFont({
@@ -88,6 +89,8 @@ export default async function RootLayout({ children }) {
     <html lang="en" className={`scroll-smooth font-clash text-base ${clashDisplay.className} ${clashDisplay.variable} ${lora.className} ${lora.variable}`}>
       <body className="w-full h-full bg-my-bg text-my-text font-clash antialiased overflow-x-hidden">
         <LoadingProvider>
+          <NavigationHandler />
+
           <header className="text-my-text sticky top-0 left-0 right-0 z-[999]">
             <Nav />
           </header>
@@ -107,10 +110,6 @@ export default async function RootLayout({ children }) {
           <footer>
             <Footer />
           </footer>
-          
-          <Suspense fallback={<div className="loader"></div>}>
-            <NavigationHandler />
-          </Suspense>
         </LoadingProvider>
 
         <Script src="https://www.instagram.com/embed.js" strategy="lazyOnload" />

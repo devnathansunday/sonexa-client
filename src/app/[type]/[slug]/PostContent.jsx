@@ -1,8 +1,19 @@
 'use client'
 import { useEffect } from "react";
+import { useLoading } from "@/context/LoadingContext";
 import Image from "next/image";
 
 const PostContent = ({ post, postHeading, postUrl }) => {
+    const { stopLoading } = useLoading();
+
+    useEffect(() => {
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                stopLoading();
+            })
+        });
+    }, []);
+
     useEffect(() => {
         if (window.instgrm) {
             window.instgrm.Embeds.process();

@@ -8,11 +8,19 @@ import { useLoading } from "@/context/LoadingContext";
 
 const LoadMorePosts = ({ initialPosts, type }) => {
     const { trackPostViews } = useTrackView();
-    const { startLoading } = useLoading();
+    const { startLoading, stopLoading } = useLoading();
 
     const [noMorePosts, setNoMorePosts] = useState(!initialPosts.hasMore);
     const [loading, setLoading] = useState(false);
     const [posts, setPosts] = useState(initialPosts.posts);
+
+    useEffect(() => {
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                stopLoading();
+            })
+        });
+    }, []);
     
     const handleLoadMore = async () => {
         setLoading(true);

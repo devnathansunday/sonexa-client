@@ -1,5 +1,6 @@
 'use client';
-import { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { createContext, useContext, useState, useCallback, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 const LoadingContext = createContext();
 
 export const useLoading = () => useContext(LoadingContext);
@@ -8,6 +9,9 @@ export function LoadingProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [width, setWidth] = useState('0%');
   const [visible, setVisible] = useState(false);
+  const prevPathRef = useRef(null);
+
+  const pathName = usePathname();
 
   const startLoading = useCallback(() => {
     setIsLoading(true);
@@ -23,17 +27,17 @@ export function LoadingProvider({ children }) {
     setIsLoading(false);
     setWidth('100%');
   }, []);
-  
+
   useEffect(() => {
     if (width === '100%') {
       setTimeout(() => {
         setVisible(false);
-      }, 2000);
+      }, 1000);
     }
   }, [width]);
 
   return (
-    <LoadingContext.Provider value={{ isLoading, startLoading, almostDone, stopLoading }}>
+    <LoadingContext.Provider value={{ isLoading, startLoading, almostDone, stopLoading, prevPathRef, pathName }}>
       {children}
       
       {visible && (

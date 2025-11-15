@@ -1,3 +1,4 @@
+import HomeLoadHandler from "@/components/HomeLoadHandler";
 import Featured from "@/components/Featured";
 import RecentPosts from "@/components/RecentPosts";
 import Latest from "@/components/Latest";
@@ -15,11 +16,15 @@ export default async function Home() {
   ]);
 
   return (
-    <main className="lg:w-[75%]">
-      <Featured posts={featuredPosts} />
-      <Latest sortedPosts={all?.posts} />
-      <RecentPosts songs={songs} news={news} videos={videos} />
-      <Guides guides={guides} />
-    </main>
+    <>
+      <HomeLoadHandler />
+      
+      <main className="lg:w-[75%]">
+        <Featured posts={featuredPosts} />
+        <Latest sortedPosts={all?.posts} />
+        <RecentPosts songs={songs} news={news} videos={videos} />
+        <Guides guides={guides} />
+      </main>
+    </>
   );
 }
