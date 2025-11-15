@@ -5,7 +5,7 @@ export async function GET(request) {
   
   // If no secret set or doesn't match, reject
   if (authHeader !== expectedAuth) {
-    // console.log('❌ Unauthorized ping attempt');
+    console.log('❌ Unauthorized ping attempt');
     return Response.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -13,7 +13,7 @@ export async function GET(request) {
   try {
     const EXPRESS_URL = process.env.EXPRESS_API_URL || 'http://192.168.137.1:4000';
     
-    // console.log('🏓 Pinging server:', EXPRESS_URL);
+    console.log('🏓 Pinging server');
     
     const response = await fetch(`${EXPRESS_URL}/ping`, {
       method: 'GET',
@@ -28,7 +28,7 @@ export async function GET(request) {
     
     const data = await response.json();
     
-    // console.log('✅ Server is alive:', data);
+    console.log('✅ Server is alive:', data);
     
     return Response.json({ 
       success: true, 
